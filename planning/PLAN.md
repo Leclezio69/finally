@@ -88,20 +88,19 @@ The user runs a single Docker command (or a provided start script). A browser op
 finally/
 ├── frontend/                 # Next.js TypeScript project (static export)
 ├── backend/                  # FastAPI uv project (Python)
-│   └── db/                   # Schema definitions, seed data, migration logic
+│   └── app/db/               # Schema definitions, seed data, migration logic
 ├── planning/                 # Project-wide documentation for agents
 │   ├── PLAN.md               # This document
 │   └── ...                   # Additional agent reference docs
 ├── scripts/
-│   ├── start_mac.sh          # Launch Docker container (macOS/Linux)
-│   ├── stop_mac.sh           # Stop Docker container (macOS/Linux)
-│   ├── start_windows.ps1     # Launch Docker container (Windows PowerShell)
-│   └── stop_windows.ps1      # Stop Docker container (Windows PowerShell)
-├── test/                     # Playwright E2E tests + docker-compose.test.yml
+│   ├── start.sh              # Launch Docker container (macOS/Linux)
+│   ├── stop.sh               # Stop Docker container (macOS/Linux)
+│   └── start.ps1             # Launch and stop for Windows PowerShell
+├── test/                     # Playwright E2E tests (run on host against container)
 ├── db/                       # Volume mount target (SQLite file lives here at runtime)
 │   └── .gitkeep              # Directory exists in repo; finally.db is gitignored
 ├── Dockerfile                # Multi-stage build (Node → Python)
-├── docker-compose.yml        # Optional convenience wrapper
+├── docker-compose.yml        # Optional dev convenience (canonical method is `docker run`)
 ├── .env                      # Environment variables (gitignored, .env.example committed)
 └── .gitignore
 ```
@@ -110,10 +109,10 @@ finally/
 
 - **`frontend/`** is a self-contained Next.js project. It knows nothing about Python. It talks to the backend via `/api/*` endpoints and `/api/stream/*` SSE endpoints. Internal structure is up to the Frontend Engineer agent.
 - **`backend/`** is a self-contained uv project with its own `pyproject.toml`. It owns all server logic including database initialization, schema, seed data, API routes, SSE streaming, market data, and LLM integration. Internal structure is up to the Backend/Market Data agents.
-- **`backend/db/`** contains schema SQL definitions and seed logic. The backend lazily initializes the database on first request — creating tables and seeding default data if the SQLite file doesn't exist or is empty.
-- **`db/`** at the top level is the runtime volume mount point. The SQLite file (`db/finally.db`) is created here by the backend and persists across container restarts via Docker volume.
+- **`backend/app/db/`** contains schema SQL definitions and seed logic (Python modules, not raw SQL files). The backend lazily initializes the database on startup — creating tables and seeding default data if the SQLite file doesn't exist or is empty.
+- **`db/`** at the project root is the runtime volume mount point only. It contains no code — just the SQLite file (`db/finally.db`) created by the backend at runtime, persisted across container restarts via Docker volume.
 - **`planning/`** contains project-wide documentation, including this plan. All agents reference files here as the shared contract.
-- **`test/`** contains Playwright E2E tests and supporting infrastructure (e.g., `docker-compose.test.yml`). Unit tests live within `frontend/` and `backend/` respectively, following each framework's conventions.
+- **`test/`** contains Playwright E2E tests that run on the host against the running Docker container. Unit tests live within `frontend/` and `backend/` respectively, following each framework's conventions.
 - **`scripts/`** contains start/stop scripts that wrap Docker commands.
 
 ---
@@ -154,6 +153,7 @@ Both the simulator and the Massive client implement the same abstract interface.
 - Correlated moves across tickers (e.g., tech stocks move together)
 - Occasional random "events" — sudden 2-5% moves on a ticker for drama
 - Starts from realistic seed prices (e.g., AAPL ~$190, GOOGL ~$175, etc.)
+- **Dynamic ticker support**: when a ticker is added that has no seed configuration, the simulator generates reasonable default GBM parameters (moderate volatility, near-zero drift) and a plausible seed price (randomized in the $50–$300 range). This allows the user or LLM to add any ticker symbol and see it stream immediately.
 - Runs as an in-process background task — no external dependencies
 
 ### Massive API (Optional)
@@ -175,7 +175,8 @@ Both the simulator and the Massive client implement the same abstract interface.
 
 - Endpoint: `GET /api/stream/prices`
 - Long-lived SSE connection; client uses native `EventSource` API
-- Server pushes price updates for all tickers known to the system at a regular cadence (~500ms) — in the single-user model this is equivalent to the user's watchlist
+- Server pushes price updates for all tickers currently in the market data source at a regular cadence (~500ms)
+- The market data source's ticker set is kept in sync with the user's watchlist: adding/removing a ticker from the watchlist calls `add_ticker()`/`remove_ticker()` on the data source, which updates the price cache and SSE stream accordingly
 - Each SSE event contains ticker, price, previous price, timestamp, and change direction
 - Client handles reconnection automatically (EventSource has built-in retry)
 
@@ -207,7 +208,7 @@ All tables include a `user_id` column defaulting to `"default"`. This is hardcod
 - `added_at` TEXT (ISO timestamp)
 - UNIQUE constraint on `(user_id, ticker)`
 
-**positions** — Current holdings (one row per ticker per user)
+**positions** — Current holdings (one row per ticker per user). When a position is fully sold (quantity reaches 0), the row is deleted — zero-quantity rows must not appear in the portfolio display or heatmap.
 - `id` TEXT PRIMARY KEY (UUID)
 - `user_id` TEXT (default: `"default"`)
 - `ticker` TEXT
@@ -225,7 +226,7 @@ All tables include a `user_id` column defaulting to `"default"`. This is hardcod
 - `price` REAL
 - `executed_at` TEXT (ISO timestamp)
 
-**portfolio_snapshots** — Portfolio value over time (for P&L chart). Recorded every 30 seconds by a background task, and immediately after each trade execution.
+**portfolio_snapshots** — Portfolio value over time (for P&L chart). Recorded every 10 seconds by a background task, and immediately after each trade execution.
 - `id` TEXT PRIMARY KEY (UUID)
 - `user_id` TEXT (default: `"default"`)
 - `total_value` REAL
@@ -259,6 +260,7 @@ All tables include a `user_id` column defaulting to `"default"`. This is hardcod
 | GET | `/api/portfolio` | Current positions, cash balance, total value, unrealized P&L |
 | POST | `/api/portfolio/trade` | Execute a trade: `{ticker, quantity, side}` |
 | GET | `/api/portfolio/history` | Portfolio value snapshots over time (for P&L chart) |
+| GET | `/api/trades` | Trade history (most recent first, optional `?limit=N`, default 50) |
 
 ### Watchlist
 | Method | Path | Description |
@@ -290,7 +292,7 @@ There is an OPENROUTER_API_KEY in the .env file in the project root.
 When the user sends a chat message, the backend:
 
 1. Loads the user's current portfolio context (cash, positions with P&L, watchlist with live prices, total portfolio value)
-2. Loads recent conversation history from the `chat_messages` table
+2. Loads the last 20 messages of conversation history from the `chat_messages` table (capped to stay within LLM context limits)
 3. Constructs a prompt with a system message, portfolio context, conversation history, and the user's new message
 4. Calls the LLM via LiteLLM → OpenRouter, requesting structured output, using the cerebras-inference skill
 5. Parses the complete structured JSON response
@@ -315,8 +317,8 @@ The LLM is instructed to respond with JSON matching this schema:
 ```
 
 - `message` (required): The conversational text shown to the user
-- `trades` (optional): Array of trades to auto-execute. Each trade goes through the same validation as manual trades (sufficient cash for buys, sufficient shares for sells)
-- `watchlist_changes` (optional): Array of watchlist modifications
+- `trades` (optional): Array of trades to auto-execute. Each trade goes through the same validation as manual trades (sufficient cash for buys, sufficient shares for sells). Additional validation: ticker is normalized to uppercase, quantity must be positive, side must be `"buy"` or `"sell"`. Invalid trades are skipped and the error is included in the response.
+- `watchlist_changes` (optional): Array of watchlist modifications. Ticker is normalized to uppercase, action must be `"add"` or `"remove"`.
 
 ### Auto-Execution
 
@@ -356,7 +358,8 @@ The frontend is a single-page application with a dense, terminal-inspired layout
 - **Main chart area** — larger chart for the currently selected ticker, with at minimum price over time. Clicking a ticker in the watchlist selects it here.
 - **Portfolio heatmap** — treemap visualization where each rectangle is a position, sized by portfolio weight, colored by P&L (green = profit, red = loss)
 - **P&L chart** — line chart showing total portfolio value over time, using data from `portfolio_snapshots`
-- **Positions table** — tabular view of all positions: ticker, quantity, avg cost, current price, unrealized P&L, % change
+- **Positions table** — tabular view of all positions: ticker, quantity, avg cost, current price, unrealized P&L, % change. Quantities display up to 4 decimal places (trimming trailing zeros); prices and P&L display to 2 decimal places.
+- **Trade history** — recent trades list (from `GET /api/trades`), showing ticker, side, quantity, price, and timestamp. Can be a collapsible section or tab within the portfolio area.
 - **Trade bar** — simple input area: ticker field, quantity field, buy button, sell button. Market orders, instant fill.
 - **AI chat panel** — docked/collapsible sidebar. Message input, scrolling conversation history, loading indicator while waiting for LLM response. Trade executions and watchlist changes shown inline as confirmations.
 - **Header** — portfolio total value (updating live), connection status indicator, cash balance
@@ -403,17 +406,17 @@ The `db/` directory in the project root maps to `/app/db` in the container. The 
 
 ### Start/Stop Scripts
 
-**`scripts/start_mac.sh`** (macOS/Linux):
+**`scripts/start.sh`** (macOS/Linux):
 - Builds the Docker image if not already built (or if `--build` flag passed)
 - Runs the container with the volume mount, port mapping, and `.env` file
 - Prints the URL to access the app
 - Optionally opens the browser
 
-**`scripts/stop_mac.sh`** (macOS/Linux):
+**`scripts/stop.sh`** (macOS/Linux):
 - Stops and removes the running container
 - Does NOT remove the volume (data persists)
 
-**`scripts/start_windows.ps1`** / **`scripts/stop_windows.ps1`**: PowerShell equivalents for Windows.
+**`scripts/start.ps1`** (Windows PowerShell): Combined start/stop script with `-Stop` flag.
 
 All scripts should be idempotent — safe to run multiple times.
 
@@ -442,7 +445,7 @@ The container is designed to deploy to AWS App Runner, Render, or any container 
 
 ### E2E Tests (in `test/`)
 
-**Infrastructure**: A separate `docker-compose.test.yml` in `test/` that spins up the app container plus a Playwright container. This keeps browser dependencies out of the production image.
+**Infrastructure**: Playwright runs on the host against the running Docker container. No separate Playwright container or `docker-compose.test.yml` needed — this keeps the test setup simple and avoids Docker-in-Docker complexity. The app container is started via `docker run` (or the start script) before tests execute.
 
 **Environment**: Tests run with `LLM_MOCK=true` by default for speed and determinism.
 
@@ -454,3 +457,24 @@ The container is designed to deploy to AWS App Runner, Render, or any container 
 - Portfolio visualization: heatmap renders with correct colors, P&L chart has data points
 - AI chat (mocked): send a message, receive a response, trade execution appears inline
 - SSE resilience: disconnect and verify reconnection
+
+---
+
+## 13. Design Decisions Log
+
+*Reviewed 2026-04-17. Clarifications incorporated into the plan above.*
+
+| # | Decision | Resolution |
+|---|----------|------------|
+| 1 | `backend/db/` vs `db/` ambiguity | Schema code lives at `backend/app/db/`; top-level `db/` is runtime volume mount only |
+| 2 | Fractional shares | Supported. Quantities display up to 4 decimal places (trimming trailing zeros) |
+| 3 | Portfolio snapshot frequency | 10 seconds (was 30s) — produces ~60 data points in a 10-minute demo |
+| 4 | Chat history window | Capped at last 20 messages to stay within LLM context limits |
+| 5 | Watchlist ticker validation | Simulator dynamically generates GBM parameters for unknown tickers |
+| 6 | SSE vs. watchlist scope | Watchlist changes call `add_ticker()`/`remove_ticker()` on the data source directly |
+| 7 | Position on full sell | Row deleted from `positions` table — no zero-quantity rows |
+| 8 | Trade history endpoint | Added `GET /api/trades` with `?limit=N` (default 50) |
+| 9 | Structured output validation | Normalize ticker to uppercase, reject negative quantity, validate side. Errors returned inline. |
+| 10 | docker-compose.yml | Optional dev convenience; canonical method is `docker run` |
+| 11 | E2E test infrastructure | Playwright runs on host against container — no docker-compose.test.yml |
+| 12 | Start/stop scripts | Consolidated to `start.sh`, `stop.sh`, and `start.ps1` |
