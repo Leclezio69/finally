@@ -27,7 +27,12 @@ export default function Home() {
   const [selectedTicker, setSelectedTicker] = useState<string | null>(null);
 
   const loadWatchlist = useCallback(async () => {
-    try { setWatchlist(await fetchWatchlist()); } catch { /* ignore */ }
+    try {
+      const wl = await fetchWatchlist();
+      setWatchlist(wl);
+      // Auto-select first ticker if none selected
+      setSelectedTicker(prev => prev ?? (wl[0]?.ticker ?? null));
+    } catch { /* ignore */ }
   }, []);
 
   const loadPortfolio = useCallback(async () => {
@@ -95,23 +100,37 @@ export default function Home() {
   return (
     <div className="h-screen flex flex-col bg-terminal-bg text-white overflow-hidden">
       {/* Header */}
-      <header className="flex items-center justify-between px-4 py-2 bg-terminal-surface border-b border-terminal-border flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <h1 className="text-accent-yellow font-bold text-lg tracking-wider">FIN<span className="text-accent-blue">ALLY</span></h1>
-          <span className="text-terminal-muted text-xs">AI Trading Workstation</span>
+      <header className="flex items-center justify-between px-4 py-1.5 bg-terminal-surface border-b border-terminal-border flex-shrink-0" style={{borderBottomColor: '#ecad0a22'}}>
+        <div className="flex items-center gap-4">
+          <h1 className="font-bold text-base tracking-[0.2em]" style={{fontFamily: "'IBM Plex Sans Condensed', sans-serif", letterSpacing: '0.15em'}}>
+            <span className="text-accent-yellow">FIN</span><span className="text-accent-blue">ALLY</span>
+          </h1>
+          <span className="text-terminal-muted text-[10px] tracking-widest uppercase border-l border-terminal-border pl-4">AI Trading Workstation</span>
         </div>
-        <div className="flex items-center gap-6">
-          {liveTotal !== null && (
-            <div className="text-center">
-              <div className="text-xs text-terminal-muted">Portfolio</div>
-              <div className={`font-mono font-bold text-sm ${liveTotal >= 10000 ? 'text-market-up' : 'text-market-down'}`}>
-                ${liveTotal.toFixed(2)}
+        <div className="flex items-center gap-5">
+          {liveTotal !== null && (() => {
+            const pnl = liveTotal - 10000;
+            const pnlPct = (pnl / 10000) * 100;
+            return (
+              <div className="flex items-center gap-3">
+                <div>
+                  <div className="text-[9px] text-terminal-muted uppercase tracking-widest">Portfolio Value</div>
+                  <div className={`font-mono font-bold text-sm ${liveTotal >= 10000 ? 'text-market-up' : 'text-market-down'}`}>
+                    ${liveTotal.toFixed(2)}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[9px] text-terminal-muted uppercase tracking-widest">P&L</div>
+                  <div className={`font-mono text-sm ${pnl >= 0 ? 'text-market-up' : 'text-market-down'}`}>
+                    {pnl >= 0 ? '+' : ''}{pnl.toFixed(2)} <span className="text-[10px]">({pnlPct >= 0 ? '+' : ''}{pnlPct.toFixed(2)}%)</span>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
           {portfolio && (
-            <div className="text-center">
-              <div className="text-xs text-terminal-muted">Cash</div>
+            <div>
+              <div className="text-[9px] text-terminal-muted uppercase tracking-widest">Cash</div>
               <div className="font-mono text-sm text-white">${portfolio.cash_balance.toFixed(2)}</div>
             </div>
           )}
@@ -122,7 +141,7 @@ export default function Home() {
       {/* Main layout */}
       <div className="flex-1 flex overflow-hidden">
         {/* Left: Watchlist */}
-        <div className="w-52 flex-shrink-0 overflow-hidden">
+        <div className="w-56 flex-shrink-0 overflow-hidden">
           <WatchlistPanel
             watchlist={watchlist}
             prices={prices}
@@ -148,28 +167,28 @@ export default function Home() {
 
           {/* Heatmap + P&L */}
           <div className="flex flex-1 overflow-hidden border-b border-terminal-border">
-            <div className="flex-1 border-r border-terminal-border p-2">
-              <div className="text-xs text-terminal-muted mb-1 uppercase tracking-wider">Portfolio Heatmap</div>
-              <div className="h-[calc(100%-20px)]">
+            <div className="flex-1 border-r border-terminal-border flex flex-col">
+              <div className="text-[9px] text-terminal-muted px-3 py-1.5 uppercase tracking-widest border-b border-terminal-border">Portfolio Heatmap</div>
+              <div className="flex-1">
                 <PortfolioHeatmap positions={portfolio?.positions || []} prices={prices} />
               </div>
             </div>
-            <div className="flex-1 p-2">
-              <div className="text-xs text-terminal-muted mb-1 uppercase tracking-wider">P&L Chart</div>
-              <div className="h-[calc(100%-20px)]">
+            <div className="flex-1 flex flex-col">
+              <div className="text-[9px] text-terminal-muted px-3 py-1.5 uppercase tracking-widest border-b border-terminal-border">P&L Chart</div>
+              <div className="flex-1">
                 <PnLChart data={history} />
               </div>
             </div>
           </div>
 
           {/* Positions + Trades */}
-          <div className="flex flex-shrink-0 max-h-40 overflow-hidden border-b border-terminal-border">
-            <div className="flex-1 border-r border-terminal-border overflow-auto">
-              <div className="text-xs text-terminal-muted px-3 pt-2 pb-1 uppercase tracking-wider">Positions</div>
+          <div className="flex flex-shrink-0 max-h-36 overflow-hidden border-b border-terminal-border">
+            <div className="flex-1 border-r border-terminal-border overflow-auto flex flex-col">
+              <div className="text-[9px] text-terminal-muted px-3 py-1 uppercase tracking-widest border-b border-terminal-border sticky top-0 bg-terminal-surface">Positions</div>
               <PositionsTable positions={portfolio?.positions || []} prices={prices} />
             </div>
-            <div className="flex-1 overflow-auto">
-              <div className="text-xs text-terminal-muted px-3 pt-2 pb-1 uppercase tracking-wider">Trade History</div>
+            <div className="flex-1 overflow-auto flex flex-col">
+              <div className="text-[9px] text-terminal-muted px-3 py-1 uppercase tracking-widest border-b border-terminal-border sticky top-0 bg-terminal-surface">Trade History</div>
               <TradeHistory trades={trades} />
             </div>
           </div>

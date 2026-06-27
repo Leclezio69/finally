@@ -51,8 +51,9 @@ export default function ChatPanel({ onSendMessage }: Props) {
 
   return (
     <div className="flex flex-col h-full bg-terminal-surface border-l border-terminal-border">
-      <div className="px-3 py-2 border-b border-terminal-border">
-        <h2 className="text-xs font-bold text-accent-yellow tracking-widest uppercase">AI Assistant</h2>
+      <div className="px-3 py-1.5 border-b border-terminal-border flex items-center justify-between">
+        <h2 className="text-[10px] font-bold text-accent-yellow tracking-widest uppercase">AI Assistant</h2>
+        <span className="text-[9px] text-accent-purple uppercase tracking-widest">FinAlly</span>
       </div>
 
       <div className="flex-1 overflow-y-auto p-3 space-y-3">

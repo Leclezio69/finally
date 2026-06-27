@@ -15,19 +15,12 @@ export default function Sparkline({ data, direction = 'flat', width = 80, height
   const chartRef = useRef<IChartApi | null>(null);
   const seriesRef = useRef<ISeriesApi<'Line'> | null>(null);
 
+  // Initialize chart once on mount
   useEffect(() => {
-    if (!containerRef.current || data.length === 0) return;
+    if (!containerRef.current) return;
 
     const init = async () => {
       const { createChart, LineSeries } = await import('lightweight-charts');
-
-      if (chartRef.current) {
-        chartRef.current.remove();
-        chartRef.current = null;
-        seriesRef.current = null;
-      }
-
-      const color = direction === 'up' ? '#3fb950' : direction === 'down' ? '#f85149' : '#8b949e';
 
       const chart = createChart(containerRef.current!, {
         width,
@@ -35,6 +28,7 @@ export default function Sparkline({ data, direction = 'flat', width = 80, height
         layout: {
           background: { color: 'transparent' },
           textColor: 'transparent',
+          attributionLogo: false,
         },
         grid: {
           vertLines: { visible: false },
@@ -49,27 +43,12 @@ export default function Sparkline({ data, direction = 'flat', width = 80, height
       });
 
       const series = chart.addSeries(LineSeries, {
-        color,
+        color: '#8b949e',
         lineWidth: 1,
         crosshairMarkerVisible: false,
         lastValueVisible: false,
         priceLineVisible: false,
       });
-
-      // Deduplicate timestamps to avoid lightweight-charts errors
-      const seen = new Set<number>();
-      const dedupedData = data
-        .filter(p => {
-          if (seen.has(p.time)) return false;
-          seen.add(p.time);
-          return true;
-        })
-        .sort((a, b) => a.time - b.time)
-        .map(p => ({ time: p.time as UTCTimestamp, value: p.value }));
-
-      if (dedupedData.length > 1) {
-        series.setData(dedupedData);
-      }
 
       chartRef.current = chart;
       seriesRef.current = series;
@@ -78,13 +57,36 @@ export default function Sparkline({ data, direction = 'flat', width = 80, height
     init();
 
     return () => {
-      if (chartRef.current) {
-        chartRef.current.remove();
-        chartRef.current = null;
-        seriesRef.current = null;
-      }
+      chartRef.current?.remove();
+      chartRef.current = null;
+      seriesRef.current = null;
     };
-  }, [data, direction, width, height]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [width, height]);
+
+  // Update data without recreating chart
+  useEffect(() => {
+    if (!seriesRef.current || data.length < 2) return;
+
+    const seen = new Set<number>();
+    const deduped = data
+      .filter(p => {
+        if (seen.has(p.time)) return false;
+        seen.add(p.time);
+        return true;
+      })
+      .sort((a, b) => a.time - b.time)
+      .map(p => ({ time: p.time as UTCTimestamp, value: p.value }));
+
+    seriesRef.current.setData(deduped);
+  }, [data]);
+
+  // Update color when direction changes
+  useEffect(() => {
+    if (!seriesRef.current) return;
+    const color = direction === 'up' ? '#26a641' : direction === 'down' ? '#da3633' : '#8b949e';
+    seriesRef.current.applyOptions({ color });
+  }, [direction]);
 
   return <div ref={containerRef} style={{ width, height }} />;
 }

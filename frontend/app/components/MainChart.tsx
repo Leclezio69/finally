@@ -25,20 +25,25 @@ export default function MainChart({ ticker, data, currentPrice }: Props) {
           width: containerRef.current!.clientWidth,
           height: containerRef.current!.clientHeight,
           layout: {
-            background: { color: '#161b22' },
-            textColor: '#8b949e',
+            background: { color: '#111418' },
+            textColor: '#6b7a8d',
+            fontFamily: "'IBM Plex Mono', monospace",
+            fontSize: 11,
+            attributionLogo: false,
           },
           grid: {
-            vertLines: { color: '#21262d' },
-            horzLines: { color: '#21262d' },
+            vertLines: { color: '#1a1f28' },
+            horzLines: { color: '#1a1f28' },
           },
           crosshair: { mode: 1 },
           rightPriceScale: {
-            borderColor: '#21262d',
+            borderColor: '#1e2530',
+            textColor: '#6b7a8d',
           },
           timeScale: {
-            borderColor: '#21262d',
+            borderColor: '#1e2530',
             timeVisible: true,
+            secondsVisible: false,
           },
         });
 
@@ -90,14 +95,16 @@ export default function MainChart({ ticker, data, currentPrice }: Props) {
 
   return (
     <div className="flex flex-col h-full bg-terminal-surface">
-      <div className="px-3 py-2 border-b border-terminal-border flex items-center justify-between">
+      <div className="px-3 py-1.5 border-b border-terminal-border flex items-center justify-between" style={{minHeight: '28px'}}>
         <div className="flex items-center gap-3">
-          <span className="font-bold text-white text-sm">{ticker || 'Select a ticker'}</span>
+          <span className="font-bold text-white text-[12px] tracking-widest">{ticker || '—'}</span>
           {currentPrice !== null && (
-            <span className="text-accent-blue font-mono text-sm">${currentPrice.toFixed(2)}</span>
+            <span className="text-accent-blue font-mono text-[12px]">${currentPrice.toFixed(2)}</span>
           )}
         </div>
-        {ticker && <span className="text-xs text-terminal-muted">Price (accumulated)</span>}
+        <span className="text-[9px] text-terminal-muted uppercase tracking-widest">
+          {ticker ? 'Live Price Chart' : 'Select a ticker from watchlist'}
+        </span>
       </div>
       <div ref={containerRef} className="flex-1" />
     </div>
