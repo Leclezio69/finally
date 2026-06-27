@@ -1,0 +1,23 @@
+# Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+test/node_modules/
+
+# Python
+backend/.venv/
+backend/__pycache__/
+backend/.pytest_cache/
+backend/.ruff_cache/
+
+# Database
+db/finally.db
+
+# Git / IDE
+.git/
+.github/
+.claude/
+**/.DS_Store
+
+# Env
+.env
