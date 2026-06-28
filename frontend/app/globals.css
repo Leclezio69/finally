@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/* Class-based dark mode for Tailwind v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* FinAlly brand theme — accessible via Tailwind classes like bg-bg-base, text-accent-yellow */
+@theme {
+  /* Backgrounds */
+  --color-bg-base: #0d1117;
+  --color-bg-panel: #1a1a2e;
+  --color-bg-surface: #161b22;
+
+  /* Brand accents */
+  --color-accent-yellow: #ecad0a;
+  --color-accent-blue: #209dd7;
+  --color-accent-purple: #753991;
+
+  /* Text */
+  --color-text-primary: #e6edf3;
+  --color-text-muted: #8b949e;
+
+  /* Borders */
+  --color-border: #30363d;
+}
+
+/* Base reset for dark terminal aesthetic */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #0d1117;
+  color: #e6edf3;
+  font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', 'Consolas',
+    monospace;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Price flash animations — used in Phase 2 watchlist */
+@keyframes flash-up {
+  0% {
+    background-color: rgba(34, 197, 94, 0.35);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+@keyframes flash-down {
+  0% {
+    background-color: rgba(239, 68, 68, 0.35);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.flash-up {
+  animation: flash-up 500ms ease-out forwards;
+}
+
+.flash-down {
+  animation: flash-down 500ms ease-out forwards;
+}
