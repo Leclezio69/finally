@@ -125,15 +125,27 @@ export default function Home() {
           >
             {chatOpen ? '\u203a' : '\u2039'}
           </button>
-          <div
+          <span
             title={statusTitle}
             style={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              backgroundColor: statusColor,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              fontSize: 10,
+              color: statusColor,
             }}
-          />
+          >
+            <span
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: statusColor,
+                flexShrink: 0,
+              }}
+            />
+            {statusTitle}
+          </span>
         </div>
       </header>
 
@@ -171,7 +183,9 @@ export default function Home() {
           transition: 'width 200ms ease',
         }}
       >
-        <ChatPanel />
+        <div style={{ visibility: chatOpen ? 'visible' : 'hidden', height: '100%' }}>
+          <ChatPanel />
+        </div>
       </aside>
 
       {/* Portfolio section */}

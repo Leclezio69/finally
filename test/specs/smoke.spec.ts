@@ -15,6 +15,11 @@ test('API health check returns ok', async ({ request }) => {
 // ─── Watchlist API ────────────────────────────────────────────────────────────
 
 test('Watchlist returns default 10 tickers', async ({ request }) => {
+  // Clean up any tickers added by other tests (e.g. COIN from chat mock, PYPL, BABA)
+  for (const ticker of ['COIN', 'PYPL', 'BABA']) {
+    await request.delete(`${BASE}/api/watchlist/${ticker}`);
+  }
+
   const res = await request.get(`${BASE}/api/watchlist`);
   expect(res.status()).toBe(200);
   const body = await res.json();
@@ -85,7 +90,16 @@ test('Portfolio returns initial $10k cash with no positions', async ({ request }
 });
 
 test('Buy shares: cash decreases, position appears', async ({ request }) => {
-  // Get initial state
+  // Sell any existing AAPL position first so we start clean
+  const initial = await (await request.get(`${BASE}/api/portfolio`)).json();
+  const existingAapl = initial.positions.find((p: { ticker: string }) => p.ticker === 'AAPL');
+  if (existingAapl && existingAapl.quantity > 0) {
+    await request.post(`${BASE}/api/portfolio/trade`, {
+      data: { ticker: 'AAPL', quantity: existingAapl.quantity, side: 'sell' },
+    });
+  }
+
+  // Get state after clean-up
   const before = await (await request.get(`${BASE}/api/portfolio`)).json();
 
   // Wait a moment for prices to stream in
@@ -100,7 +114,7 @@ test('Buy shares: cash decreases, position appears', async ({ request }) => {
   expect(tradeBody.success).toBe(true);
   expect(tradeBody.new_cash_balance).toBeLessThan(before.cash_balance);
 
-  // Portfolio should reflect the position
+  // Portfolio should reflect exactly 1 AAPL
   const after = await (await request.get(`${BASE}/api/portfolio`)).json();
   const aaplPos = after.positions.find((p: { ticker: string }) => p.ticker === 'AAPL');
   expect(aaplPos).toBeTruthy();

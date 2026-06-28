@@ -56,8 +56,11 @@ test('Trade chip appears for AI-executed trade', async ({ page }) => {
   // Wait for response and chip rendering
   await page.waitForTimeout(8000);
 
-  // BUY chip should appear — MOCK_RESPONSE includes AAPL buy trade
-  await expect(page.locator('text=/BUY|SELL/')).toHaveCount(1);
+  // BUY chip should appear in the assistant message — MOCK_RESPONSE includes AAPL buy trade
+  // Scope to the chat panel (aside with AI CHAT header) to avoid matching TradeHistory rows
+  const chatPanel = page.locator('aside').filter({ hasText: 'AI CHAT' });
+  const tradeChipCount = await chatPanel.locator('text=/BUY|SELL/').count();
+  expect(tradeChipCount).toBeGreaterThanOrEqual(1);
 });
 
 // CHAT-05: Watchlist chip appears for AI watchlist change (MOCK adds COIN)
@@ -74,8 +77,11 @@ test('Watchlist chip appears for AI watchlist change', async ({ page }) => {
   // Wait for response and chip rendering
   await page.waitForTimeout(8000);
 
-  // Watchlist chip should appear — MOCK_RESPONSE includes COIN add
-  await expect(page.locator('text=/watchlist/i')).toHaveCount(1);
+  // Watchlist chip should appear in the chat panel — MOCK_RESPONSE includes COIN add
+  // Chip renders "+ COIN watchlist" — scope to the assistant message area
+  const chatPanel = page.locator('aside').filter({ hasText: 'AI CHAT' });
+  const watchlistChipCount = await chatPanel.locator('text=/watchlist/i').count();
+  expect(watchlistChipCount).toBeGreaterThanOrEqual(1);
 });
 
 // CHAT-06: Collapse toggle hides and restores chat panel
