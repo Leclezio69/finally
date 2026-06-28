@@ -77,5 +77,11 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 | Codebase map | `.planning/codebase/` | ✓ Complete |
 | Config | `.planning/config.json` | ✓ Complete |
 
+## Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260628-g8u | UI polish pass — layout, chart, watchlist, scrollbars | 2026-06-28 | b02ad20 | [260628-g8u-ui-polish-pass](.planning/quick/260628-g8u-ui-polish-pass/) |
+
 ---
 *Initialized: 2026-06-28*
