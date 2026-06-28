@@ -60,6 +60,13 @@
 - VIS-03: Dense desktop-first layout — watchlist and chart visible without scrolling
 - VIS-04: Terminal aesthetic — no rounded cards, minimal padding, data-dense
 
+**Plans:** 3 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Install lightweight-charts + create WatchlistContext (provider, hooks, price history ring buffer)
+- [ ] 02-02-PLAN.md — WatchlistPanel + WatchlistRow + Sparkline + mount in page.tsx (live watchlist visible)
+- [ ] 02-03-PLAN.md — MainChart component + mount in page.tsx (ticker selection and live chart)
+
 **Success Criteria:**
 1. Page loads showing all 10 default tickers (AAPL, GOOGL, MSFT, AMZN, TSLA, NVDA, META, JPM, V, NFLX) with prices
 2. Prices visibly update and cells flash green/red within 1s of SSE events; flash fades within 500ms
