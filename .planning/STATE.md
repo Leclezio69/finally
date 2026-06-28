@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-last_updated: "2026-06-28T00:08:00.000Z"
+status: ✓ Executed (commit e7bc0c2)
+last_updated: "2026-06-28T15:02:41.065Z"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 9
-  completed_plans: 8
-  percent: 60
+  completed_plans: 9
+  percent: 80
 ---
 
 # FinAlly — Project State
@@ -19,9 +19,13 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-28)
 
 **Core value:** A user opens the app and immediately sees live streaming prices, can trade with one click, and can ask the AI to manage their portfolio — all without setup, login, or configuration.
-**Current focus:** Phase 4 — AI Chat Panel
+**Current focus:** Phase 5 — Docker & E2E
 
 ## Current Phase
+
+**Phase 4: AI Chat Panel**
+Status: ✓ Executed (commit e7bc0c2)
+Goal: ChatPanel component with message history, spinner, trade/watchlist chips; collapse toggle in header; 6 E2E Playwright tests.
 
 **Phase 3: Portfolio & Trading**
 Status: ✓ Executed (commits 0ec8869, 8f9f3a7, 25c8760)
@@ -42,7 +46,7 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 | 1 | Frontend Scaffold | ✓ Executed |
 | 2 | Watchlist & Charts | ✓ Executed |
 | 3 | Portfolio & Trading | ✓ Executed |
-| 4 | AI Chat Panel | ◆ Executing (1/2 plans done — 04-01 complete, 04-02 pending) |
+| 4 | AI Chat Panel | ✓ Executed (2/2 plans done — 04-01, 04-02 complete) |
 | 5 | Docker & E2E | ○ Not started |
 
 ## Key Context
@@ -56,6 +60,7 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 - Dev proxy: `next.config.ts` proxies `/api/*` → `http://localhost:8000` in dev mode
 - LLM mock: set `LLM_MOCK=true` in `.env` for E2E testing (no API key needed)
 - Phase 4 Plan 01 (4ab6d24): refetchPortfolio + refetchWatchlist exposed from contexts; @keyframes spin added; LLM MOCK_RESPONSE updated with AAPL buy + COIN add
+- Phase 4 Plan 02 (e7bc0c2): ChatPanel.tsx created; page.tsx wired with collapse toggle; chat.spec.ts with 6 E2E tests; all CHAT-01–06 requirements satisfied
 
 ## Planning Artifacts
 

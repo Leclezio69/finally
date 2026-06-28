@@ -49,12 +49,12 @@
 
 ### AI Chat
 
-- [ ] **CHAT-01**: AI chat panel has a message input and scrolling conversation history
-- [ ] **CHAT-02**: User sends a message; loading indicator appears while waiting for LLM response
-- [ ] **CHAT-03**: LLM response appears as assistant message; conversational text is shown
-- [ ] **CHAT-04**: Trades executed by AI are shown inline in the chat as confirmations
-- [ ] **CHAT-05**: Watchlist changes made by AI are shown inline in the chat as confirmations
-- [ ] **CHAT-06**: Chat panel is docked/collapsible (sidebar or panel)
+- [x] **CHAT-01**: AI chat panel has a message input and scrolling conversation history
+- [x] **CHAT-02**: User sends a message; loading indicator appears while waiting for LLM response
+- [x] **CHAT-03**: LLM response appears as assistant message; conversational text is shown
+- [x] **CHAT-04**: Trades executed by AI are shown inline in the chat as confirmations
+- [x] **CHAT-05**: Watchlist changes made by AI are shown inline in the chat as confirmations
+- [x] **CHAT-06**: Chat panel is docked/collapsible (sidebar or panel)
 
 ### Visual Design
 
@@ -122,12 +122,12 @@
 | TRADE-03 | Phase 3 | Pending |
 | TRADE-04 | Phase 3 | Pending |
 | TRADE-05 | Phase 3 | Pending |
-| CHAT-01 | Phase 4 | Pending |
-| CHAT-02 | Phase 4 | Pending |
-| CHAT-03 | Phase 4 | Pending |
-| CHAT-04 | Phase 4 | Pending |
-| CHAT-05 | Phase 4 | Pending |
-| CHAT-06 | Phase 4 | Pending |
+| CHAT-01 | Phase 4 | Complete |
+| CHAT-02 | Phase 4 | Complete |
+| CHAT-03 | Phase 4 | Complete |
+| CHAT-04 | Phase 4 | Complete |
+| CHAT-05 | Phase 4 | Complete |
+| CHAT-06 | Phase 4 | Complete |
 | VIS-01 | Phase 1 | Pending |
 | VIS-02 | Phase 1 | Pending |
 | VIS-03 | Phase 2 | Complete |

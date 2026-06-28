@@ -13,7 +13,7 @@
 | 1 | Frontend Scaffold | Working Next.js app with SSE connection | SETUP-02, SETUP-03, SETUP-04, VIS-01, VIS-02 | 5 |
 | 2 | Watchlist & Charts | 2/3 | In Progress|  |
 | 3 | Portfolio & Trading | Heatmap, P&L chart, positions table, trade bar | PORT-01–06, TRADE-01–05 | 5 |
-| 4 | AI Chat Panel | Conversational AI with inline trade execution | CHAT-01–06 | 4 |
+| 4 | AI Chat Panel | 2/2 | Complete   | 2026-06-28 |
 | 5 | Docker & E2E | Full container build, all tests passing | SETUP-05, SETUP-06, TEST-01 | 4 |
 
 ---
@@ -139,13 +139,13 @@
 - CHAT-05: Watchlist changes shown inline as confirmation chips
 - CHAT-06: Chat panel is collapsible/toggleable to reclaim screen space
 
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 **Wave 1**
-- [ ] 04-01-PLAN.md — Expose refetchPortfolio + refetchWatchlist from contexts; update LLM mock response for E2E determinism; add @keyframes spin
+- [x] 04-01-PLAN.md — Expose refetchPortfolio + refetchWatchlist from contexts; update LLM mock response for E2E determinism; add @keyframes spin
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 04-02-PLAN.md — ChatPanel component + page.tsx wiring + collapse toggle + E2E tests
+- [x] 04-02-PLAN.md — ChatPanel component + page.tsx wiring + collapse toggle + E2E tests
 
 **Cross-cutting constraints:**
 - All new components require `'use client'` directive (static export)
