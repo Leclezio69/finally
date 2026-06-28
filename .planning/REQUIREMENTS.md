@@ -16,11 +16,11 @@
 
 ### Watchlist
 
-- [ ] **WATCH-01**: User sees a watchlist panel with the 10 default tickers on first load
+- [x] **WATCH-01**: User sees a watchlist panel with the 10 default tickers on first load
 - [ ] **WATCH-02**: Each ticker row shows: symbol, current price, daily change %, and a sparkline mini-chart
-- [ ] **WATCH-03**: Prices update live via SSE (`EventSource` connected to `/api/stream/prices`)
+- [x] **WATCH-03**: Prices update live via SSE (`EventSource` connected to `/api/stream/prices`)
 - [ ] **WATCH-04**: Price cells flash green (uptick) or red (downtick) with a CSS transition fading over ~500ms
-- [ ] **WATCH-05**: Sparklines accumulate price history from SSE events since page load (grow progressively)
+- [x] **WATCH-05**: Sparklines accumulate price history from SSE events since page load (grow progressively)
 - [ ] **WATCH-06**: User can add a ticker via input field; ticker appears in watchlist and starts streaming
 - [ ] **WATCH-07**: User can remove a ticker from the watchlist
 
@@ -28,7 +28,7 @@
 
 - [ ] **CHART-01**: Clicking a ticker in the watchlist selects it and displays it in the main chart area
 - [ ] **CHART-02**: Main chart shows price over time for the selected ticker (canvas-based, lightweight-charts)
-- [ ] **CHART-03**: First ticker is auto-selected on page load
+- [x] **CHART-03**: First ticker is auto-selected on page load
 
 ### Portfolio
 
@@ -101,16 +101,16 @@
 | SETUP-02 | Phase 1 | Pending |
 | SETUP-03 | Phase 1 | Pending |
 | SETUP-04 | Phase 1 | Pending |
-| WATCH-01 | Phase 2 | Pending |
+| WATCH-01 | Phase 2 | Complete |
 | WATCH-02 | Phase 2 | Pending |
-| WATCH-03 | Phase 2 | Pending |
+| WATCH-03 | Phase 2 | Complete |
 | WATCH-04 | Phase 2 | Pending |
-| WATCH-05 | Phase 2 | Pending |
+| WATCH-05 | Phase 2 | Complete |
 | WATCH-06 | Phase 2 | Pending |
 | WATCH-07 | Phase 2 | Pending |
 | CHART-01 | Phase 2 | Pending |
 | CHART-02 | Phase 2 | Pending |
-| CHART-03 | Phase 2 | Pending |
+| CHART-03 | Phase 2 | Complete |
 | PORT-01 | Phase 3 | Pending |
 | PORT-02 | Phase 3 | Pending |
 | PORT-03 | Phase 3 | Pending |

@@ -11,7 +11,7 @@
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|-----------------|
 | 1 | Frontend Scaffold | Working Next.js app with SSE connection | SETUP-02, SETUP-03, SETUP-04, VIS-01, VIS-02 | 5 |
-| 2 | Watchlist & Charts | Live prices, sparklines, price flash, main chart | WATCH-01–07, CHART-01–03, VIS-03, VIS-04 | 5 |
+| 2 | Watchlist & Charts | 1/3 | In Progress|  |
 | 3 | Portfolio & Trading | Heatmap, P&L chart, positions table, trade bar | PORT-01–06, TRADE-01–05 | 5 |
 | 4 | AI Chat Panel | Conversational AI with inline trade execution | CHAT-01–06 | 4 |
 | 5 | Docker & E2E | Full container build, all tests passing | SETUP-05, SETUP-06, TEST-01 | 4 |
@@ -60,10 +60,10 @@
 - VIS-03: Dense desktop-first layout — watchlist and chart visible without scrolling
 - VIS-04: Terminal aesthetic — no rounded cards, minimal padding, data-dense
 
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 **Wave 1**
-- [ ] 02-01-PLAN.md — Install lightweight-charts + create WatchlistContext (provider, hooks, price history ring buffer)
+- [x] 02-01-PLAN.md — Install lightweight-charts + create WatchlistContext (provider, hooks, price history ring buffer)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 02-02-PLAN.md — WatchlistPanel + WatchlistRow + Sparkline + mount in page.tsx (live watchlist visible)
