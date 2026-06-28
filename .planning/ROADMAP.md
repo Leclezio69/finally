@@ -102,13 +102,13 @@
 - TRADE-04: Trade history shows recent trades (ticker, side, qty, price, time)
 - TRADE-05: Error shown on insufficient funds or shares (not a crash)
 
-**Plans:** 3 plans
+**Plans:** 3/3 plans executed
 
 **Wave 1**
-- [ ] 03-01-PLAN.md — Install recharts + PortfolioContext + Header live values + SSE status dot + PortfolioPanel shell
-**Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 03-02-PLAN.md — Trade bar + Positions table (full trade execution vertical slice) *(parallel with 03-03)*
-- [ ] 03-03-PLAN.md — Heatmap (Treemap) + P&L chart (LineChart) + Trade history *(parallel with 03-02)*
+- [x] 03-01-PLAN.md — Install recharts + PortfolioContext + Header live values + SSE status dot + PortfolioPanel shell
+**Wave 2**
+- [x] 03-02-PLAN.md — Trade bar + Positions table (full trade execution vertical slice)
+- [x] 03-03-PLAN.md — Heatmap (Treemap) + P&L chart (LineChart) + Trade history
 
 **Cross-cutting constraints:**
 - All new components require `'use client'` directive (static export)

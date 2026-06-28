@@ -6,10 +6,10 @@ status: executing
 last_updated: "2026-06-28T06:13:15.855Z"
 progress:
   total_phases: 5
-  completed_phases: 2
-  total_plans: 7
-  completed_plans: 4
-  percent: 40
+  completed_phases: 3
+  total_plans: 10
+  completed_plans: 7
+  percent: 60
 ---
 
 # FinAlly — Project State
@@ -19,12 +19,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-28)
 
 **Core value:** A user opens the app and immediately sees live streaming prices, can trade with one click, and can ask the AI to manage their portfolio — all without setup, login, or configuration.
-**Current focus:** Phase 3 — Portfolio & Trading
+**Current focus:** Phase 4 — AI Chat Panel
 
 ## Current Phase
 
+**Phase 3: Portfolio & Trading**
+Status: ✓ Executed (commits 0ec8869, 8f9f3a7, 25c8760)
+Goal: Portfolio heatmap, P&L chart, positions table, trade bar, trade history, and live header values.
+
 **Phase 2: Watchlist & Charts**
-Status: Ready to execute
+Status: ✓ Executed
 Goal: Build the live watchlist panel with streaming prices, flash animations, sparklines, add/remove controls, and a main chart area with lightweight-charts.
 
 **Phase 1: Frontend Scaffold**
@@ -37,7 +41,7 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 |-------|------|--------|
 | 1 | Frontend Scaffold | ✓ Executed |
 | 2 | Watchlist & Charts | ✓ Executed |
-| 3 | Portfolio & Trading | ○ Not started |
+| 3 | Portfolio & Trading | ✓ Executed |
 | 4 | AI Chat Panel | ○ Not started |
 | 5 | Docker & E2E | ○ Not started |
 
