@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-28T08:00:00.000Z"
+last_updated: "2026-06-28T00:08:00.000Z"
 progress:
   total_phases: 5
   completed_phases: 3
-  total_plans: 12
-  completed_plans: 7
-  percent: 58
+  total_plans: 9
+  completed_plans: 8
+  percent: 60
 ---
 
 # FinAlly — Project State
@@ -42,7 +42,7 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 | 1 | Frontend Scaffold | ✓ Executed |
 | 2 | Watchlist & Charts | ✓ Executed |
 | 3 | Portfolio & Trading | ✓ Executed |
-| 4 | AI Chat Panel | ◆ Planned (2 plans, ready to execute) |
+| 4 | AI Chat Panel | ◆ Executing (1/2 plans done — 04-01 complete, 04-02 pending) |
 | 5 | Docker & E2E | ○ Not started |
 
 ## Key Context
@@ -55,6 +55,7 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 - Docker: Dockerfile Stage 1 (Node build) now works — `frontend/` is a real directory
 - Dev proxy: `next.config.ts` proxies `/api/*` → `http://localhost:8000` in dev mode
 - LLM mock: set `LLM_MOCK=true` in `.env` for E2E testing (no API key needed)
+- Phase 4 Plan 01 (4ab6d24): refetchPortfolio + refetchWatchlist exposed from contexts; @keyframes spin added; LLM MOCK_RESPONSE updated with AAPL buy + COIN add
 
 ## Planning Artifacts
 
