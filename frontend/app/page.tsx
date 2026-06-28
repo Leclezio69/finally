@@ -1,4 +1,5 @@
 import MainChart from './components/chart/MainChart'
+import WatchlistPanel from './components/watchlist/WatchlistPanel'
 
 export default function Home() {
   return (
@@ -40,7 +41,7 @@ export default function Home() {
         </span>
       </header>
 
-      {/* Watchlist placeholder */}
+      {/* Watchlist panel */}
       <aside
         style={{
           gridArea: 'watch',
@@ -49,7 +50,7 @@ export default function Home() {
           overflow: 'hidden',
         }}
       >
-        <PlaceholderPanel label="WATCHLIST" phase="Phase 2" />
+        <WatchlistPanel />
       </aside>
 
       {/* Main chart placeholder */}
