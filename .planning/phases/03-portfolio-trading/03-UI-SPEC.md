@@ -5,6 +5,7 @@ status: draft
 shadcn_initialized: false
 preset: none
 created: 2026-06-28
+revised: 2026-06-28
 ---
 
 # Phase 3 — UI Design Contract: Portfolio & Trading
@@ -56,22 +57,27 @@ Source: Derived from `frontend/app/layout.tsx` (48px header), `frontend/app/comp
 
 ## Typography
 
+Exactly 4 sizes. Exactly 2 weights.
+
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
-| Body | 13px | 400 | 1.4 | Cell values, prices, quantities, table data |
-| Label | 11px | 600 | 1.3 | Panel headers (ALL CAPS, letter-spacing 0.15em), column headers, status labels |
-| Heading | 15px | 700 | 1.2 | FinAlly brand wordmark only (established in page.tsx header) |
-| Numeric display | 13px | 600 | 1.0 | Total portfolio value in header (prominent data value) |
+| Label | 11px | 600 | 1.3 | Panel headers (ALL CAPS, letter-spacing 0.15em), column headers, status labels, sub-labels, axis ticks, side badges, heatmap sub-labels, time values |
+| Body | 13px | 400 | 1.4 | Cell values, prices, quantities, table data, ticker symbols |
+| Emphasis | 13px | 600 | 1.0 | Total portfolio value in header, ticker in trade history, numeric display values |
+| Heading | 15px | 600 | 1.2 | FinAlly brand wordmark only (established in page.tsx header) |
 
 Rules:
 - All text renders in JetBrains Mono (monospace stack from globals.css)
 - Panel section labels: ALL CAPS, letter-spacing 0.15em, color `#8b949e`, size 11px, weight 600
 - Price values: 13px weight 400 — flash animation handles visual emphasis
 - P&L values: color distinguishes sign (green/red), no weight change
+- Axis ticks (P&L chart x/y): 11px, weight 600 (label role), color `#8b949e`
+- Side badges (BUY/SELL): 11px, weight 600 (label role), color `#22c55e` / `#ef4444`
 - Quantities: up to 4 decimal places trimming trailing zeros (REQUIREMENTS PORT-06)
 - Dollar amounts (prices, avg cost, P&L): fixed 2 decimal places
+- No 700 weight anywhere in this phase — all emphasized text uses 600
 
-Source: Established patterns in `frontend/app/page.tsx` (15px/700 wordmark, 11px muted), `frontend/app/components/watchlist/WatchlistRow.tsx` (13px body, 11px label), `frontend/app/components/watchlist/WatchlistPanel.tsx` (11px/600 panel header).
+Source: Established patterns in `frontend/app/page.tsx` (wordmark, 11px muted), `frontend/app/components/watchlist/WatchlistRow.tsx` (13px body, 11px label), `frontend/app/components/watchlist/WatchlistPanel.tsx` (11px/600 panel header).
 
 ---
 
@@ -85,8 +91,8 @@ Source: Established patterns in `frontend/app/page.tsx` (15px/700 wordmark, 11px
 | Accent Blue (10%) | `#209dd7` (--color-accent-blue) | Buy button, selected ticker left-border indicator |
 | Accent Purple | `#753991` (--color-accent-purple) | Sell button (submit/destructive trade action) |
 | Accent Yellow | `#ecad0a` (--color-accent-yellow) | FinAlly wordmark only — NOT used for interactive elements in this phase |
-| Positive P&L | `#22c55e` | Positive P&L values, heatmap profit rectangles, upward change % |
-| Negative P&L | `#ef4444` | Negative P&L values, heatmap loss rectangles, downward change %, error messages |
+| Positive P&L | `#22c55e` | Positive P&L values, heatmap profit rectangles, upward change %, BUY badge |
+| Negative P&L | `#ef4444` | Negative P&L values, heatmap loss rectangles, downward change %, error messages, SELL badge |
 | Text primary | `#e6edf3` (--color-text-primary) | All primary data values, ticker symbols |
 | Text muted | `#8b949e` (--color-text-muted) | Panel labels, secondary info, placeholder text |
 | Border | `#30363d` (--color-border) | All panel borders, dividers |
@@ -99,6 +105,8 @@ Accent reserved for:
 - Blue (`#209dd7`): Buy button background, selected-ticker left-border indicator only
 - Purple (`#753991`): Sell button background only
 - Yellow (`#ecad0a`): FinAlly wordmark only, status dot reconnecting state only
+
+Focal point: The portfolio value (PORT-01, header) and heatmap (PORT-04, port grid area) are the primary visual anchors of this phase. The heatmap uses color and size to communicate position health at a glance; the portfolio total is the single most prominent numeric value on screen.
 
 Source: `frontend/app/globals.css` (theme tokens), `frontend/app/components/watchlist/WatchlistRow.tsx` (green/red P&L colors, border colors), `frontend/app/page.tsx` (surface colors), planning/PLAN.md (color scheme section).
 
@@ -156,7 +164,7 @@ The port area must contain all four of: heatmap, P&L chart, positions table, tra
   - Loss (unrealized_pnl < 0): `#ef4444` at 60% opacity as fill; label in `#e6edf3`
   - Breakeven (unrealized_pnl === 0): `#30363d` fill; label in `#8b949e`
 - Rectangle label: ticker symbol, 11px, weight 600, centered
-- Sub-label: P&L percent, 10px, weight 400, centered below ticker
+- Sub-label: P&L percent, 11px, weight 600, centered below ticker (label role — collapses former 10px sub-label)
 - Empty state: If no positions, show centered text "No open positions" — 11px, color `#30363d`
 - Border: `#0d1117` gap between rectangles (recharts treemap default gap)
 - Background: `#0d1117`
@@ -166,8 +174,8 @@ The port area must contain all four of: heatmap, P&L chart, positions table, tra
 
 - Library: recharts `<LineChart>` (established library per PLAN.md)
 - Data source: `GET /api/portfolio/history` — array of `{total_value, recorded_at}` snapshots
-- X axis: time (recorded_at), no label, tick format: `HH:MM` — 10px, color `#8b949e`
-- Y axis: total_value in USD, right-aligned ticks — 10px, color `#8b949e`, format `$N,NNN`
+- X axis: time (recorded_at), no label, tick format: `HH:MM` — 11px, color `#8b949e` (label role)
+- Y axis: total_value in USD, right-aligned ticks — 11px, color `#8b949e` (label role), format `$N,NNN`
 - Line: single line, color `#209dd7` (accent blue), stroke-width 1.5px, no dots
 - Grid lines: horizontal only, color `#21262d`, stroke-dasharray `3 3`
 - Background: `#0d1117`
@@ -197,7 +205,7 @@ Row styling:
 
 Header row:
 - Height: 28px, background `#161b22`, border-bottom `1px solid #30363d`
-- Column labels: 10px, weight 600, color `#8b949e`, ALL CAPS
+- Column labels: 11px, weight 600, color `#8b949e`, ALL CAPS (label role — collapses former 10px column headers)
 - Sticky at top of scrollable table body
 
 Empty state: "No positions" — 11px, color `#30363d`, centered vertically in table area.
@@ -231,11 +239,11 @@ Loading state during trade:
 - Fetch on mount + after each trade execution
 - Each row: 32px height, flex layout
 - Columns: side badge | ticker | qty | price | time
-- Side badge: "BUY" — 9px, weight 700, color `#22c55e`; "SELL" — 9px, weight 700, color `#ef4444`
+- Side badge: "BUY" — 11px, weight 600, color `#22c55e` (label role); "SELL" — 11px, weight 600, color `#ef4444` (label role)
 - Ticker: 13px, weight 600, color `#e6edf3`
-- Qty: 12px, weight 400, color `#8b949e` (up to 4dp trimmed)
-- Price: 12px, weight 400, color `#8b949e` — `$N.NN`
-- Time: 10px, color `#30363d` — relative format `HH:MM:SS`
+- Qty: 11px, weight 600, color `#8b949e` (label role — collapses former 12px)
+- Price: 11px, weight 600, color `#8b949e` (label role — collapses former 12px) — `$N.NN`
+- Time: 11px, color `#30363d` (label role — collapses former 10px) — relative format `HH:MM:SS`
 - Row divider: `border-bottom: 1px solid #21262d`
 - Hover: `background-color: #161b22`
 - Empty state: "No trades yet" — 11px, color `#30363d`, centered
@@ -245,7 +253,7 @@ Loading state during trade:
 ## Interaction Contracts
 
 ### Trade execution flow
-1. User fills ticker + qty in trade bar → clicks Buy or Sell
+1. User fills ticker + qty in trade bar → clicks Buy or Sell (adjacent ticker/qty fields provide noun context for the single-word CTA labels)
 2. Button enters loading state ("...", disabled, opacity 0.6) — inputs disabled
 3. `POST /api/portfolio/trade` called
 4. On success:
@@ -274,28 +282,28 @@ Loading state during trade:
 
 ## Copywriting Contract
 
-| Element | Copy |
-|---------|------|
-| Primary CTA — buy | "Buy" |
-| Primary CTA — sell | "Sell" |
-| Trade bar ticker placeholder | "Ticker" |
-| Trade bar qty placeholder | "Qty" |
-| Trade error — insufficient funds | "Insufficient funds" |
-| Trade error — insufficient shares | "Insufficient shares" |
-| Trade error — generic | "Trade failed. Try again." |
-| Positions empty state | "No positions" |
-| Heatmap empty state | "No open positions" |
-| Trade history empty state | "No trades yet" |
-| P&L chart empty state | "No history yet" |
-| Status dot tooltip — connected | "Connected" |
-| Status dot tooltip — reconnecting | "Reconnecting..." |
-| Status dot tooltip — disconnected | "Disconnected" |
-| Header portfolio label | "PORTFOLIO" |
-| Header cash label | "CASH" |
-| Panel section label — positions | "POSITIONS" |
-| Panel section label — history | "HISTORY" |
-| Panel section label — heatmap | "HEATMAP" |
-| Panel section label — P&L | "P&L" |
+| Element | Copy | Note |
+|---------|------|------|
+| Primary CTA — buy | "Buy" | Single-word; ticker + qty inputs immediately left provide noun context |
+| Primary CTA — sell | "Sell" | Single-word; ticker + qty inputs immediately left provide noun context |
+| Trade bar ticker placeholder | "Ticker" | |
+| Trade bar qty placeholder | "Qty" | |
+| Trade error — insufficient funds | "Insufficient funds" | |
+| Trade error — insufficient shares | "Insufficient shares" | |
+| Trade error — generic | "Trade failed. Try again." | |
+| Positions empty state | "No positions" | |
+| Heatmap empty state | "No open positions" | |
+| Trade history empty state | "No trades yet" | |
+| P&L chart empty state | "No history yet" | |
+| Status dot tooltip — connected | "Connected" | |
+| Status dot tooltip — reconnecting | "Reconnecting..." | |
+| Status dot tooltip — disconnected | "Disconnected" | |
+| Header portfolio label | "PORTFOLIO" | |
+| Header cash label | "CASH" | |
+| Panel section label — positions | "POSITIONS" | |
+| Panel section label — history | "HISTORY" | |
+| Panel section label — heatmap | "HEATMAP" | |
+| Panel section label — P&L | "P&L" | |
 
 Destructive actions in this phase: Sell is the primary trade action. It is not destructive in the confirmation-dialog sense (simulated portfolio, no real money). No confirmation dialog for sell. Error state handles invalid sells inline.
 
