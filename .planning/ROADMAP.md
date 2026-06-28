@@ -142,7 +142,7 @@
 **Plans:** 2 plans
 
 **Wave 1**
-- [ ] 04-01-PLAN.md — Expose refetchPortfolio + refetchWatchlist from contexts + add @keyframes spin
+- [ ] 04-01-PLAN.md — Expose refetchPortfolio + refetchWatchlist from contexts; update LLM mock response for E2E determinism; add @keyframes spin
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 04-02-PLAN.md — ChatPanel component + page.tsx wiring + collapse toggle + E2E tests

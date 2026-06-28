@@ -453,22 +453,25 @@ function WatchlistChip({ ticker, action }: { ticker: string; action: string }) {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Expose `refetchAll` from PortfolioContext?**
    - What we know: `refetchAll` exists but is not in the public API
    - What's unclear: Whether to add it to context or call portfolio APIs directly in ChatPanel
    - Recommendation: Add `refetchPortfolio: () => Promise<void>` to `PortfolioContextValue` — cleanest approach
+   - RESOLVED: Add `refetchPortfolio: refetchAll` to both `PortfolioContextValue` type (line 35) and provider value object (line 120) in `PortfolioContext.tsx`. Implemented in Plan 04-01 Task 1.
 
 2. **Watchlist sync after AI changes**
    - What we know: `addTicker()` from context re-POSTs to backend; backend already executed it
    - What's unclear: Whether to swallow the 409 or refetch the list
    - Recommendation: Add a `refetchWatchlist` function to WatchlistContext (parallel to `refetchPortfolio`), or simply call `GET /api/watchlist` directly in chat handler and push results
+   - RESOLVED: Add `refetchWatchlist: () => Promise<void>` to `WatchlistContextValue` that fetches `GET /api/watchlist` and updates local `tickers` state without POSTing. Implemented in Plan 04-01 Task 2.
 
 3. **Chat collapse toggle placement**
    - What we know: `page.tsx` owns the grid; collapse state should live there
    - What's unclear: Whether the toggle button lives in the header or as a tab on the panel edge
    - Recommendation: Add a small chevron button to the existing header row; clicking it toggles `chatOpen` state in `page.tsx`
+   - RESOLVED: Collapse button (`‹`/`›` chevron) placed in the header row next to the SSE status dot. `chatOpen` state lives in `page.tsx`; aside width transitions between 320px and 40px. Implemented in Plan 04-02 Task 2.
 
 ---
 
