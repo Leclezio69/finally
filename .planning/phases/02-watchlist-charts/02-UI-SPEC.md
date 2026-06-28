@@ -27,17 +27,20 @@ created: 2026-06-28
 
 ## Spacing Scale
 
-Declared values (must be multiples of 4):
+Declared values (standard set, multiples of 4):
 
 | Token | Value | Usage |
 |-------|-------|-------|
 | xs | 4px | Gap between sparkline and price, inline icon padding, row internal gaps |
-| sm | 8px | Watchlist row horizontal padding, input field padding |
-| md | 12px | Watchlist panel vertical section padding, panel header padding |
-| lg | 16px | Header horizontal padding (existing), add-ticker area padding |
-| xl | 24px | Gap between header elements (existing) |
+| sm | 8px | Watchlist row horizontal padding, input field padding, panel header padding |
+| md | 16px | Header horizontal padding (existing), add-ticker area padding, watchlist panel vertical section padding |
+| lg | 24px | Gap between header elements (existing), vertical spacing between major sections |
+| xl | 32px | Reserved for larger layout gaps (not used in this phase) |
 
-Exceptions: Watchlist row height is 36px (not a spacing token but a fixed row dimension for data density). Sparkline dimensions are 60px x 24px per D-01.
+Exceptions:
+- **12px exception — terminal row vertical padding:** Used ONLY for watchlist panel header vertical padding (6px top + 6px bottom within a 32px header row) where 8px would waste space and 16px would be excessive in data-dense terminal rows. This is an interior padding value, not a general spacing token.
+- Watchlist row height is 36px (not a spacing token but a fixed row dimension for data density).
+- Sparkline dimensions are 60px x 24px per D-01.
 
 ---
 
@@ -48,11 +51,10 @@ All text uses the monospace font stack declared in globals.css.
 | Role | Size | Weight | Line Height | Usage |
 |------|------|--------|-------------|-------|
 | Body | 13px | 400 (regular) | 1.4 | Watchlist prices, change %, ticker input value |
-| Label | 11px | 600 (semibold) | 1.2 | Panel section headers ("WATCHLIST"), "Add" button text, chart axis labels |
+| Label | 11px | 600 (semibold) | 1.2 | Panel section headers ("WATCHLIST"), "Add Ticker" button text, chart axis labels, chart crosshair tooltip |
 | Ticker | 13px | 600 (semibold) | 1.4 | Ticker symbols in watchlist rows (e.g., AAPL) |
-| Chart Tooltip | 12px | 400 (regular) | 1.3 | Crosshair tooltip on main chart |
 
-Note: 13px base is already set on `body` in globals.css. Do not override it.
+Note: 13px base is already set on `body` in globals.css. Do not override it. Two sizes (11px and 13px) provide sufficient hierarchy for a data-dense terminal. Tooltip text uses 11px Label role to maintain a clean two-size system.
 
 ---
 
@@ -66,17 +68,17 @@ All colors are pre-defined in globals.css `@theme` block as CSS custom propertie
 | Secondary (30%) | `#1a1a2e` | `bg-bg-panel` | Watchlist panel background, add-ticker area background |
 | Surface | `#161b22` | `bg-bg-surface` | Watchlist row hover state, selected ticker row background, header background |
 | Text primary | `#e6edf3` | `text-text-primary` | Ticker symbols, prices, chart labels |
-| Text muted | `#8b949e` | `text-text-muted` | Change %, "Add" placeholder, panel headers, chart axis labels |
+| Text muted | `#8b949e` | `text-text-muted` | Change %, "Ticker..." placeholder, panel headers, chart axis labels |
 | Border | `#30363d` | `border-border` | Panel edges, dividers, input field borders |
 | Accent yellow (10%) | `#ecad0a` | `text-accent-yellow` | FinAlly brand text in header only (existing). NOT used in this phase for interactive elements. |
-| Accent blue | `#209dd7` | `text-accent-blue` / `bg-accent-blue` | "Add" button background, selected ticker left-edge indicator (2px accent bar) |
+| Accent blue | `#209dd7` | `text-accent-blue` / `bg-accent-blue` | "Add Ticker" button background, selected ticker left-edge indicator (2px accent bar) |
 | Accent purple | `#753991` | `bg-accent-purple` | Not used in this phase (reserved for submit/trade buttons in Phase 3) |
 | Positive | `rgba(34, 197, 94, 0.35)` | `.flash-up` class | Uptick flash background (existing keyframe), sparkline stroke when positive |
 | Positive text | `#22c55e` | — (inline style) | Change % text when positive, sparkline polyline stroke when positive |
 | Negative | `rgba(239, 68, 68, 0.35)` | `.flash-down` class | Downtick flash background (existing keyframe), sparkline stroke when negative |
 | Negative text | `#ef4444` | — (inline style) | Change % text when negative, sparkline polyline stroke when negative |
 
-Accent reserved for: FinAlly logo text (yellow), "Add" button and selected row indicator (blue). No other elements use accent colors in this phase.
+Accent reserved for: FinAlly logo text (yellow), "Add Ticker" button and selected row indicator (blue). No other elements use accent colors in this phase.
 
 ---
 
@@ -90,7 +92,7 @@ Replaces `<PlaceholderPanel label="WATCHLIST">` in `page.tsx`.
 1. Panel header: "WATCHLIST" label, 11px semibold, `text-text-muted`, letter-spacing `0.15em`, padding 8px 8px
 2. Ticker list: scrollable container (`overflow-y: auto`), each row is a `WatchlistRow`
 3. Divider: 1px solid `border-border`, full width
-4. Add-ticker area: always visible, pinned to bottom. Contains text input + "Add" button in a row.
+4. Add-ticker area: always visible, pinned to bottom. Contains text input + "Add Ticker" button in a row.
 
 **Panel header dimensions:**
 - Height: 32px
@@ -101,7 +103,7 @@ Replaces `<PlaceholderPanel label="WATCHLIST">` in `page.tsx`.
 - Height: 40px
 - Padding: 4px 8px
 - Input: flex-grow, height 28px, background `bg-bg-base`, border 1px solid `border-border`, color `text-text-primary`, placeholder "Ticker...", font-size 13px, padding-left 8px
-- Button: width 48px, height 28px, background `bg-accent-blue`, color `#ffffff`, font-size 11px, font-weight 600, text "ADD", no border-radius (terminal aesthetic per VIS-04)
+- Button: width 72px, height 28px, background `bg-accent-blue`, color `#ffffff`, font-size 11px, font-weight 600, text "Add Ticker", no border-radius (terminal aesthetic per VIS-04)
 
 ### WatchlistRow
 
@@ -113,7 +115,7 @@ Replaces `<PlaceholderPanel label="WATCHLIST">` in `page.tsx`.
 | Price | 64px | e.g. "192.45" | Right, regular 13px, `text-text-primary` |
 | Change % | 52px | e.g. "+1.23%" | Right, regular 13px, green (#22c55e) or red (#ef4444) |
 | Sparkline | 60px | SVG polyline | Right |
-| Remove button | 16px | "x" character | Right, visible on hover only, `text-text-muted`, cursor pointer |
+| Remove button | 16px | "x" character, `aria-label="Remove {ticker}"` | Right, visible on hover only, `text-text-muted`, cursor pointer |
 
 **Interaction states:**
 - Default: background transparent
@@ -200,14 +202,14 @@ Per decisions D-09 through D-12:
 
 | Element | Copy |
 |---------|------|
-| Primary CTA | "ADD" (add ticker button) |
+| Primary CTA | "Add Ticker" (add ticker button) |
 | Watchlist header | "WATCHLIST" |
 | Chart header | "{TICKER}" (dynamic, shows selected ticker symbol) |
 | Add ticker placeholder | "Ticker..." |
 | Empty chart state | "Waiting for data..." |
 | Empty watchlist state | "No tickers. Add one below." |
 | Add ticker duplicate error | "Already watching {TICKER}" (shown as red text below input, disappears after 3s) |
-| Add ticker API error | "Failed to add ticker" (shown as red text below input, disappears after 3s) |
+| Add ticker API error | "Failed to add ticker. Try again." (shown as red text below input, disappears after 3s) |
 | Remove last ticker warning | No warning. Allowed to remove all tickers. Chart shows empty state. |
 
 ---
@@ -221,14 +223,15 @@ Per decisions D-09 through D-12:
 
 ### Add Ticker
 - Input auto-uppercases as user types (D-07 discretion note)
-- Submit on Enter key or "ADD" button click
+- Submit on Enter key or "Add Ticker" button click
 - Disable button and input while API call is in flight (prevent double-submit)
 - On success: clear input, new ticker appears at bottom of watchlist, SSE begins streaming it
 - On duplicate: show "Already watching {TICKER}" error text
-- On API error: show "Failed to add ticker" error text
+- On API error: show "Failed to add ticker. Try again." error text
 
 ### Remove Ticker
 - Hover watchlist row to reveal "x" button (D-08)
+- "x" button includes `aria-label="Remove {ticker}"` for accessibility (e.g., `aria-label="Remove AAPL"`)
 - Click "x": fires `DELETE /api/watchlist/{ticker}` immediately, no confirmation dialog
 - On success: row disappears, if it was selected ticker, first remaining ticker becomes selected
 - On API error: row remains, no error shown (silent failure acceptable for remove)
