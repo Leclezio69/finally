@@ -1,5 +1,8 @@
 'use client'
 
+import TradeBar from './TradeBar'
+import PositionsTable from './PositionsTable'
+
 export default function PortfolioPanel() {
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -51,20 +54,13 @@ export default function PortfolioPanel() {
             display: 'flex',
             flexDirection: 'column',
             minHeight: 0,
+            overflow: 'hidden',
             borderTop: '1px solid #30363d',
           }}
         >
-          <div
-            style={{
-              flex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 11,
-              color: '#30363d',
-            }}
-          >
-            Trade Bar / Positions
+          <TradeBar />
+          <div style={{ flex: 1, minHeight: 0 }}>
+            <PositionsTable />
           </div>
         </div>
       </div>
