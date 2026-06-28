@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: ✓ Executed (commit 276c1d6)
-last_updated: "2026-06-28T04:35:38.974Z"
+status: ◆ Planning Phase 2
+last_updated: "2026-06-28T06:00:00.000Z"
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 1
+  total_plans: 4
   completed_plans: 1
   percent: 20
 ---
@@ -23,6 +23,10 @@ See: .planning/PROJECT.md (updated 2026-06-28)
 
 ## Current Phase
 
+**Phase 2: Watchlist & Charts**
+Status: ◆ Planned (3 plans, ready to execute)
+Goal: Build the live watchlist panel with streaming prices, flash animations, sparklines, add/remove controls, and a main chart area with lightweight-charts.
+
 **Phase 1: Frontend Scaffold**
 Status: ✓ Executed (commit 276c1d6)
 Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with Tailwind CSS dark theme, configure static export, and establish an SSE price hook.
@@ -32,7 +36,7 @@ Goal: Remove the `frontend` empty file, create a Next.js TypeScript project with
 | Phase | Name | Status |
 |-------|------|--------|
 | 1 | Frontend Scaffold | ✓ Executed |
-| 2 | Watchlist & Charts | ○ Not started |
+| 2 | Watchlist & Charts | ◆ Planned (3 plans) |
 | 3 | Portfolio & Trading | ○ Not started |
 | 4 | AI Chat Panel | ○ Not started |
 | 5 | Docker & E2E | ○ Not started |

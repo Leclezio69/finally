@@ -62,10 +62,17 @@
 
 **Plans:** 3 plans
 
-Plans:
+**Wave 1**
 - [ ] 02-01-PLAN.md — Install lightweight-charts + create WatchlistContext (provider, hooks, price history ring buffer)
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 02-02-PLAN.md — WatchlistPanel + WatchlistRow + Sparkline + mount in page.tsx (live watchlist visible)
-- [ ] 02-03-PLAN.md — MainChart component + mount in page.tsx (ticker selection and live chart)
+- [ ] 02-03-PLAN.md — MainChart component + mount in page.tsx (ticker selection and live chart) *(parallel with 02-02)*
+
+**Cross-cutting constraints:**
+- All new components require `'use client'` directive (static export)
+- `WatchlistProvider` must be nested inside `<PriceProvider>` in `layout.tsx`
+- `firstPrice` per ticker (session baseline) tracks the first SSE update for correct sparkline color
 
 **Success Criteria:**
 1. Page loads showing all 10 default tickers (AAPL, GOOGL, MSFT, AMZN, TSLA, NVDA, META, JPM, V, NFLX) with prices
