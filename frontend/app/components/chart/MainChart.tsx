@@ -20,6 +20,7 @@ export default function MainChart() {
   const chartRef = useRef<ReturnType<typeof createChart> | null>(null)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const seriesRef = useRef<any>(null)
+  const lastTimeRef = useRef<number>(0)
 
   // Effect 1 — Chart initialization (mount once)
   useEffect(() => {
@@ -78,22 +79,33 @@ export default function MainChart() {
     const history = priceHistory[selectedTicker] ?? []
     // Synthesize timestamps spaced 500ms apart ending at now
     // (priceHistory stores raw prices without timestamps — T-02-10: approximate times, visual only)
-    const now = Math.floor(Date.now() / 1000)
+    // Leave 1 second gap before "now" so incoming SSE ticks (which carry real Unix floats
+    // like 1782667206.6) are always strictly after the last synthesized point.
+    const now = Date.now() / 1000 - 1
     const data = history.map((price, i) => ({
       time: (now - (history.length - 1 - i) * 0.5) as UTCTimestamp,
       value: price,
     }))
 
     seriesRef.current.setData(data)
+    lastTimeRef.current = data.length > 0 ? (data[data.length - 1].time as number) : 0
     chartRef.current.timeScale().scrollToRealTime()
   }, [selectedTicker]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Effect 3 — Live tick: append each SSE price event via update() (D-06: not setData on tick)
   useEffect(() => {
     if (!update || !seriesRef.current) return
-    // timestamp is a string in PriceUpdate — convert to number for UTCTimestamp
-    const t = parseFloat(update.timestamp) as UTCTimestamp
-    seriesRef.current.update({ time: t, value: update.price })
+    const t = parseFloat(update.timestamp)
+    // Guarantee strictly increasing time: if SSE timestamp ≤ last written time (e.g. because
+    // the synthesized history ended at a rounded "now" that is ≥ the live tick's float), advance
+    // by 1ms so lightweight-charts never sees an out-of-order point.
+    const safeT = Math.max(t, lastTimeRef.current + 0.001) as UTCTimestamp
+    lastTimeRef.current = safeT
+    try {
+      seriesRef.current.update({ time: safeT, value: update.price })
+    } catch {
+      // lightweight-charts throws on time ordering violations — skip the offending tick
+    }
   }, [update])
 
   return (

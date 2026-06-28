@@ -45,9 +45,9 @@ export default function WatchlistRow({ ticker }: WatchlistRowProps) {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '52px 64px 52px 60px 16px',
+        gridTemplateColumns: '64px 80px 66px 1fr 20px',
         alignItems: 'center',
-        height: 38,
+        height: 28,
         padding: '0 8px',
         paddingLeft: isSelected ? '6px' : '8px',
         cursor: 'pointer',

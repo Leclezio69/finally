@@ -28,8 +28,8 @@ export default function RootLayout({
                   "watch  chart  chart  chat"
                   "port   port   port   chat"
                 `,
-                gridTemplateColumns: '220px 1fr 1fr 320px',
-                gridTemplateRows: '52px 1fr 40vh',
+                gridTemplateColumns: '280px 1fr 1fr 320px',
+                gridTemplateRows: '52px 1fr 44vh',
                 height: '100vh',
                 overflow: 'hidden',
               }}

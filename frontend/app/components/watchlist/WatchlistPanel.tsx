@@ -38,7 +38,7 @@ export default function WatchlistPanel() {
       {/* Panel header */}
       <div
         style={{
-          height: 32,
+          height: 28,
           display: 'flex',
           alignItems: 'center',
           padding: '0 8px',
@@ -74,7 +74,7 @@ export default function WatchlistPanel() {
         <div style={{ height: 1, backgroundColor: '#30363d' }} />
         <div
           style={{
-            height: 40,
+            height: 36,
             display: 'flex',
             alignItems: 'center',
             padding: '0 8px',

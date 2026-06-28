@@ -38,8 +38,8 @@ export function WatchlistProvider({ children }: { children: React.ReactNode }) {
   const refetchWatchlist = useCallback(async () => {
     try {
       const resp = await fetch('/api/watchlist')
-      const data = (await resp.json()) as { tickers: Array<{ ticker: string }> }
-      const list = data.tickers.map((t) => t.ticker)
+      const data = (await resp.json()) as Array<{ ticker: string }>
+      const list = data.map((t) => t.ticker)
       setTickers(list)
       if (list.length > 0 && !selectedTicker) {
         setSelectedTicker(list[0])

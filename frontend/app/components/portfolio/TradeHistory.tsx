@@ -23,11 +23,11 @@ function TradeRow({ trade }: { trade: Trade }) {
     <div
       style={{
         height: 32,
-        display: 'flex',
+        display: 'grid',
+        gridTemplateColumns: '40px 60px 1fr 1fr 80px',
         alignItems: 'center',
         padding: '0 8px',
         borderBottom: '1px solid #21262d',
-        gap: 8,
         backgroundColor: hovered ? '#161b22' : 'transparent',
       }}
       onMouseEnter={() => setHovered(true)}
@@ -47,24 +47,22 @@ function TradeRow({ trade }: { trade: Trade }) {
       </span>
 
       {/* Ticker */}
-      <span
-        style={{ fontSize: 13, fontWeight: 600, color: '#e6edf3', width: 48, flexShrink: 0 }}
-      >
+      <span style={{ fontSize: 13, fontWeight: 600, color: '#e6edf3' }}>
         {trade.ticker}
       </span>
 
       {/* Qty */}
-      <span style={{ fontSize: 11, fontWeight: 600, color: '#8b949e', flexShrink: 0 }}>
+      <span style={{ fontSize: 11, fontWeight: 600, color: '#8b949e' }}>
         {formatQuantity(trade.quantity)}
       </span>
 
       {/* Price */}
-      <span style={{ fontSize: 11, fontWeight: 600, color: '#8b949e', flexShrink: 0 }}>
+      <span style={{ fontSize: 11, fontWeight: 600, color: '#8b949e' }}>
         ${trade.price.toFixed(2)}
       </span>
 
       {/* Time */}
-      <span style={{ fontSize: 11, color: '#30363d', marginLeft: 'auto', flexShrink: 0 }}>
+      <span style={{ fontSize: 11, color: '#30363d', textAlign: 'right' }}>
         {formatTime(trade.executed_at)}
       </span>
     </div>

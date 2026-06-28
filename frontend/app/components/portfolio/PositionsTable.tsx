@@ -16,7 +16,7 @@ export default function PositionsTable() {
           background: '#161b22',
           borderBottom: '1px solid #30363d',
           display: 'grid',
-          gridTemplateColumns: '52px 60px 68px 68px 72px 52px',
+          gridTemplateColumns: '1fr 1fr 1fr 1fr 1.2fr 0.8fr',
           alignItems: 'center',
           padding: '0 8px',
           flexShrink: 0,
@@ -68,7 +68,7 @@ function PositionRow({ position }: { position: Position }) {
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '52px 60px 68px 68px 72px 52px',
+        gridTemplateColumns: '1fr 1fr 1fr 1fr 1.2fr 0.8fr',
         alignItems: 'center',
         height: 36,
         padding: '0 8px',
