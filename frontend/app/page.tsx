@@ -1,14 +1,17 @@
 'use client'
 
+import { useState } from 'react'
 import MainChart from './components/chart/MainChart'
 import WatchlistPanel from './components/watchlist/WatchlistPanel'
 import PortfolioPanel from './components/portfolio/PortfolioPanel'
+import ChatPanel from './components/chat/ChatPanel'
 import { usePortfolio } from './providers/PortfolioContext'
 import { usePriceStatus } from './providers/PriceContext'
 
 export default function Home() {
   const { totalValue, cashBalance } = usePortfolio()
   const priceStatus = usePriceStatus()
+  const [chatOpen, setChatOpen] = useState(true)
 
   const statusColor =
     priceStatus === 'connected'
@@ -98,7 +101,7 @@ export default function Home() {
           </span>
         </div>
 
-        {/* SSE connection status dot */}
+        {/* SSE connection status dot + collapse toggle */}
         <div
           style={{
             marginLeft: 'auto',
@@ -107,6 +110,21 @@ export default function Home() {
             gap: 8,
           }}
         >
+          <button
+            onClick={() => setChatOpen((prev) => !prev)}
+            title={chatOpen ? 'Collapse chat' : 'Expand chat'}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: '#8b949e',
+              fontSize: 16,
+              padding: '0 4px',
+              lineHeight: 1,
+            }}
+          >
+            {chatOpen ? '\u203a' : '\u2039'}
+          </button>
           <div
             title={statusTitle}
             style={{
@@ -142,16 +160,18 @@ export default function Home() {
         <MainChart />
       </main>
 
-      {/* AI chat placeholder */}
+      {/* AI chat panel */}
       <aside
         style={{
           gridArea: 'chat',
           backgroundColor: '#1a1a2e',
           borderLeft: '1px solid #30363d',
           overflow: 'hidden',
+          width: chatOpen ? '320px' : '40px',
+          transition: 'width 200ms ease',
         }}
       >
-        <PlaceholderPanel label="AI CHAT" phase="Phase 4" />
+        <ChatPanel />
       </aside>
 
       {/* Portfolio section */}
@@ -167,32 +187,5 @@ export default function Home() {
         <PortfolioPanel />
       </section>
     </>
-  )
-}
-
-function PlaceholderPanel({ label, phase }: { label: string; phase: string }) {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        gap: 4,
-      }}
-    >
-      <span
-        style={{
-          color: '#30363d',
-          fontSize: 11,
-          letterSpacing: '0.2em',
-          fontWeight: 600,
-        }}
-      >
-        {label}
-      </span>
-      <span style={{ color: '#21262d', fontSize: 10 }}>— {phase} —</span>
-    </div>
   )
 }
