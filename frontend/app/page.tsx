@@ -1,3 +1,5 @@
+import MainChart from './components/chart/MainChart'
+
 export default function Home() {
   return (
     <>
@@ -58,7 +60,7 @@ export default function Home() {
           overflow: 'hidden',
         }}
       >
-        <PlaceholderPanel label="CHART" phase="Phase 2" />
+        <MainChart />
       </main>
 
       {/* AI chat placeholder */}
