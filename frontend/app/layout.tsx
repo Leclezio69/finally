@@ -24,12 +24,12 @@ export default function RootLayout({
               style={{
                 display: 'grid',
                 gridTemplateAreas: `
-                  "header header header"
-                  "watch  chart  chat"
-                  "port   chart  chat"
+                  "header header header header"
+                  "watch  chart  chart  chat"
+                  "port   port   port   chat"
                 `,
-                gridTemplateColumns: '280px 1fr 320px',
-                gridTemplateRows: '48px 1fr 1fr',
+                gridTemplateColumns: '220px 1fr 1fr 320px',
+                gridTemplateRows: '52px 1fr 40vh',
                 height: '100vh',
                 overflow: 'hidden',
               }}

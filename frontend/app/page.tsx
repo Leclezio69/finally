@@ -57,6 +57,9 @@ export default function Home() {
           AI Trading Workstation
         </span>
 
+        {/* Vertical separator */}
+        <div style={{ borderLeft: '1px solid #30363d', height: 28, flexShrink: 0 }} />
+
         {/* Portfolio total value */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           <span
@@ -69,7 +72,7 @@ export default function Home() {
           >
             PORTFOLIO
           </span>
-          <span style={{ fontSize: 13, fontWeight: 600, color: '#e6edf3' }}>
+          <span style={{ fontSize: 16, fontWeight: 700, color: '#e6edf3' }}>
             {totalValue.toLocaleString('en-US', {
               style: 'currency',
               currency: 'USD',
@@ -91,7 +94,7 @@ export default function Home() {
           >
             CASH
           </span>
-          <span style={{ fontSize: 13, fontWeight: 400, color: '#e6edf3' }}>
+          <span style={{ fontSize: 15, fontWeight: 400, color: '#e6edf3' }}>
             {cashBalance.toLocaleString('en-US', {
               style: 'currency',
               currency: 'USD',
