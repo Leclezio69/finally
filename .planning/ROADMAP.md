@@ -102,6 +102,20 @@
 - TRADE-04: Trade history shows recent trades (ticker, side, qty, price, time)
 - TRADE-05: Error shown on insufficient funds or shares (not a crash)
 
+**Plans:** 3 plans
+
+**Wave 1**
+- [ ] 03-01-PLAN.md — Install recharts + PortfolioContext + Header live values + SSE status dot + PortfolioPanel shell
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 03-02-PLAN.md — Trade bar + Positions table (full trade execution vertical slice) *(parallel with 03-03)*
+- [ ] 03-03-PLAN.md — Heatmap (Treemap) + P&L chart (LineChart) + Trade history *(parallel with 03-02)*
+
+**Cross-cutting constraints:**
+- All new components require `'use client'` directive (static export)
+- PortfolioProvider must be nested inside WatchlistProvider in layout.tsx
+- Live totalValue recalculated client-side from SSE prices (NOT polling GET /api/portfolio)
+- recharts required for Treemap and LineChart (installed in Plan 01)
+
 **Success Criteria:**
 1. Header shows total value and cash; values update within 1s as prices stream without page interaction
 2. After buying 5 shares of AAPL: position appears in table with correct quantity, avg cost, and P&L; heatmap shows AAPL rectangle
