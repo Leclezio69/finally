@@ -69,3 +69,8 @@ body {
 .flash-down {
   animation: flash-down 500ms ease-out forwards;
 }
+
+/* Spinner animation — used in ChatPanel loading state */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

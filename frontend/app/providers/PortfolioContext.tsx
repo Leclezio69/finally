@@ -33,6 +33,7 @@ export type PortfolioContextValue = {
   trades: Trade[]
   history: Snapshot[]
   executeTrade: (ticker: string, quantity: number, side: 'buy' | 'sell') => Promise<string | null>
+  refetchPortfolio: () => Promise<void>
 }
 
 export const PortfolioContext = createContext<PortfolioContextValue>({
@@ -42,6 +43,7 @@ export const PortfolioContext = createContext<PortfolioContextValue>({
   trades: [],
   history: [],
   executeTrade: async () => null,
+  refetchPortfolio: async () => {},
 })
 
 export function PortfolioProvider({ children }: { children: React.ReactNode }) {
@@ -117,7 +119,7 @@ export function PortfolioProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <PortfolioContext.Provider
-      value={{ positions, cashBalance, totalValue, trades, history, executeTrade }}
+      value={{ positions, cashBalance, totalValue, trades, history, executeTrade, refetchPortfolio: refetchAll }}
     >
       {children}
     </PortfolioContext.Provider>

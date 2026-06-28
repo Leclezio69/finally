@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { PriceContext } from './PriceContext'
 
 export type WatchlistContextValue = {
@@ -11,6 +11,7 @@ export type WatchlistContextValue = {
   firstPrice: Record<string, number>
   addTicker: (ticker: string) => Promise<void>
   removeTicker: (ticker: string) => Promise<void>
+  refetchWatchlist: () => Promise<void>
 }
 
 export const WatchlistContext = createContext<WatchlistContextValue>({
@@ -21,6 +22,7 @@ export const WatchlistContext = createContext<WatchlistContextValue>({
   firstPrice: {},
   addTicker: async () => {},
   removeTicker: async () => {},
+  refetchWatchlist: async () => {},
 })
 
 export function WatchlistProvider({ children }: { children: React.ReactNode }) {
@@ -33,21 +35,24 @@ export function WatchlistProvider({ children }: { children: React.ReactNode }) {
   const firstPriceRef = useRef<Record<string, number>>({})
   const [firstPrice, setFirstPrice] = useState<Record<string, number>>({})
 
+  const refetchWatchlist = useCallback(async () => {
+    try {
+      const resp = await fetch('/api/watchlist')
+      const data = (await resp.json()) as { tickers: Array<{ ticker: string }> }
+      const list = data.tickers.map((t) => t.ticker)
+      setTickers(list)
+      if (list.length > 0 && !selectedTicker) {
+        setSelectedTicker(list[0])
+      }
+    } catch {
+      // Silently fail
+    }
+  }, [selectedTicker])
+
   // Effect 1 — mount fetch: load watchlist from API and auto-select first ticker
   useEffect(() => {
-    fetch('/api/watchlist')
-      .then((resp) => resp.json())
-      .then((data: { tickers: Array<{ ticker: string }> }) => {
-        const list = data.tickers.map((t) => t.ticker)
-        setTickers(list)
-        if (list.length > 0) {
-          setSelectedTicker(list[0])
-        }
-      })
-      .catch(() => {
-        // Silently fail — tickers remain empty on network error
-      })
-  }, [])
+    refetchWatchlist()
+  }, [refetchWatchlist])
 
   // Effect 2 — price history accumulation: ring buffer (D-03: 100-point cap)
   useEffect(() => {
@@ -111,6 +116,7 @@ export function WatchlistProvider({ children }: { children: React.ReactNode }) {
         firstPrice,
         addTicker,
         removeTicker,
+        refetchWatchlist,
       }}
     >
       {children}

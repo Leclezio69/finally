@@ -12,8 +12,8 @@ EXTRA_BODY = {"provider": {"order": ["cerebras"]}}
 
 MOCK_RESPONSE = {
     "message": "I'm FinAlly, your AI trading assistant! I can analyze your portfolio and execute trades. How can I help you today?",
-    "trades": [],
-    "watchlist_changes": [],
+    "trades": [{"ticker": "AAPL", "side": "buy", "quantity": 1}],
+    "watchlist_changes": [{"ticker": "COIN", "action": "add"}],
 }
 
 SYSTEM_PROMPT = """You are FinAlly, an AI trading assistant for a simulated trading workstation.
