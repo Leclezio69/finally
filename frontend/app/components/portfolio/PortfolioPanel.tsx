@@ -2,6 +2,9 @@
 
 import TradeBar from './TradeBar'
 import PositionsTable from './PositionsTable'
+import Heatmap from './Heatmap'
+import PnLChart from './PnLChart'
+import TradeHistory from './TradeHistory'
 
 export default function PortfolioPanel() {
   return (
@@ -31,23 +34,17 @@ export default function PortfolioPanel() {
 
       {/* Content area */}
       <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
-        {/* Row A: Heatmap + P&L Chart (top half) */}
+        {/* Row A: Heatmap (left) + P&L Chart (right) */}
         <div style={{ flex: 1, display: 'flex', minHeight: 0 }}>
-          <div
-            style={{
-              flex: 1,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 11,
-              color: '#30363d',
-            }}
-          >
-            Heatmap / P&L Chart
+          <div style={{ flex: 1, minWidth: 0, borderRight: '1px solid #30363d' }}>
+            <Heatmap />
+          </div>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <PnLChart />
           </div>
         </div>
 
-        {/* Row B: Trade Bar + Positions (bottom half) */}
+        {/* Row B: Trade Bar + Positions table + Trade history */}
         <div
           style={{
             flex: 1,
@@ -61,6 +58,9 @@ export default function PortfolioPanel() {
           <TradeBar />
           <div style={{ flex: 1, minHeight: 0 }}>
             <PositionsTable />
+          </div>
+          <div style={{ flex: 1, minHeight: 0, borderTop: '1px solid #30363d' }}>
+            <TradeHistory />
           </div>
         </div>
       </div>
