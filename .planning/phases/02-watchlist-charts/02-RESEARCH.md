@@ -875,17 +875,19 @@ useEffect(() => {
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **priceHistory type: `number[]` vs `{time: number, value: number}[]`**
    - What we know: UI-SPEC defines `priceHistory: Record<string, number[]>` (raw prices). Sparklines only need prices. MainChart needs `{time, value}` for `setData()` on ticker switch.
    - What's unclear: Should we store timestamps alongside prices in the history buffer, or reconstruct them approximately?
    - Recommendation: The planner should consider storing `{time: number, value: number}[]` in `priceHistory` to simplify MainChart. This is a discretion-area adjustment from the UI-SPEC type. Sparklines can extract `.value` for their calculations.
+   - **RESOLVED:** `number[]` retained per UI-SPEC type; timestamps synthesized in MainChart ticker-switch effect (02-03 Task 1 Effect 2) by spacing history points 500ms apart ending at now.
 
 2. **Watchlist API response shape for `GET /api/watchlist`**
    - What we know: CONTEXT.md states it returns `{tickers: [{ticker, price, ...}]}`.
    - What's unclear: Full shape (does it include `change_percent`? Does it return current live prices?).
    - Recommendation: WatchlistContext initial fetch only needs the ticker symbols. Use `data.tickers.map(t => t.ticker)` and rely on SSE for live prices.
+   - **RESOLVED:** `data.tickers.map(t => t.ticker)` confirmed in plan 02-01 Task 2 action; live prices come from SSE, not the watchlist endpoint.
 
 ---
 
