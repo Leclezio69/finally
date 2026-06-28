@@ -1,7 +1,7 @@
 ---
 phase: 3
 slug: portfolio-trading
-status: draft
+status: approved 2026-06-28
 shadcn_initialized: false
 preset: none
 created: 2026-06-28
