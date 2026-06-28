@@ -26,8 +26,8 @@
 
 ### Charts
 
-- [ ] **CHART-01**: Clicking a ticker in the watchlist selects it and displays it in the main chart area
-- [ ] **CHART-02**: Main chart shows price over time for the selected ticker (canvas-based, lightweight-charts)
+- [x] **CHART-01**: Clicking a ticker in the watchlist selects it and displays it in the main chart area
+- [x] **CHART-02**: Main chart shows price over time for the selected ticker (canvas-based, lightweight-charts)
 - [x] **CHART-03**: First ticker is auto-selected on page load
 
 ### Portfolio
@@ -60,8 +60,8 @@
 
 - [ ] **VIS-01**: Dark theme: backgrounds `#0d1117` / `#1a1a2e`, muted gray borders
 - [ ] **VIS-02**: Color scheme: accent yellow `#ecad0a`, blue `#209dd7`, purple `#753991` for submit buttons
-- [ ] **VIS-03**: Desktop-first dense layout — every panel visible without scrolling on a wide screen
-- [ ] **VIS-04**: Professional terminal aesthetic inspired by Bloomberg/trading workstations
+- [x] **VIS-03**: Desktop-first dense layout — every panel visible without scrolling on a wide screen
+- [x] **VIS-04**: Professional terminal aesthetic inspired by Bloomberg/trading workstations
 
 ### Testing
 
@@ -108,8 +108,8 @@
 | WATCH-05 | Phase 2 | Complete |
 | WATCH-06 | Phase 2 | Pending |
 | WATCH-07 | Phase 2 | Pending |
-| CHART-01 | Phase 2 | Pending |
-| CHART-02 | Phase 2 | Pending |
+| CHART-01 | Phase 2 | Complete |
+| CHART-02 | Phase 2 | Complete |
 | CHART-03 | Phase 2 | Complete |
 | PORT-01 | Phase 3 | Pending |
 | PORT-02 | Phase 3 | Pending |
@@ -130,8 +130,8 @@
 | CHAT-06 | Phase 4 | Pending |
 | VIS-01 | Phase 1 | Pending |
 | VIS-02 | Phase 1 | Pending |
-| VIS-03 | Phase 2 | Pending |
-| VIS-04 | Phase 2 | Pending |
+| VIS-03 | Phase 2 | Complete |
+| VIS-04 | Phase 2 | Complete |
 | SETUP-05 | Phase 5 | Pending |
 | SETUP-06 | Phase 5 | Pending |
 | TEST-01 | Phase 5 | Pending |
