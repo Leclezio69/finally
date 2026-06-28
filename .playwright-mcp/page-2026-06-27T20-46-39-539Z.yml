@@ -1,0 +1,303 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - heading "FINALLY" [level=1] [ref=e5]
+        - generic [ref=e6]: AI Trading Workstation
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]: Portfolio
+          - generic [ref=e10]: $9989.07
+        - generic [ref=e11]:
+          - generic [ref=e12]: Cash
+          - generic [ref=e13]: $9304.27
+        - generic "Live" [ref=e14]:
+          - generic [ref=e16]: Live
+    - generic [ref=e17]:
+      - generic [ref=e19]:
+        - heading "Watchlist" [level=2] [ref=e21]
+        - generic [ref=e22]:
+          - generic [ref=e24] [cursor=pointer]:
+            - generic [ref=e25]:
+              - generic [ref=e26]: AAPL
+              - button "×" [ref=e27]
+            - generic [ref=e28]:
+              - generic [ref=e29]:
+                - generic [ref=e30]: $189.85
+                - generic [ref=e31]: ▲ +0.01%
+              - table [ref=e34]:
+                - row [ref=e35]:
+                  - cell
+                  - cell [ref=e36]:
+                    - link "Charting by TradingView" [ref=e40]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e41]
+                  - cell
+          - generic [ref=e46] [cursor=pointer]:
+            - generic [ref=e47]:
+              - generic [ref=e48]: AMZN
+              - button "×" [ref=e49]
+            - generic [ref=e50]:
+              - generic [ref=e51]:
+                - generic [ref=e52]: $184.75
+                - generic [ref=e53]: ▲ +0.01%
+              - table [ref=e56]:
+                - row [ref=e57]:
+                  - cell
+                  - cell [ref=e58]:
+                    - link "Charting by TradingView" [ref=e62]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e63]
+                  - cell
+          - generic [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]:
+              - generic [ref=e70]: GOOGL
+              - button "×" [ref=e71]
+            - generic [ref=e72]:
+              - generic [ref=e73]:
+                - generic [ref=e74]: $175.06
+                - generic [ref=e75]: ▲ +0.01%
+              - table [ref=e78]:
+                - row [ref=e79]:
+                  - cell
+                  - cell [ref=e80]:
+                    - link "Charting by TradingView" [ref=e84]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e85]
+                  - cell
+          - generic [ref=e90] [cursor=pointer]:
+            - generic [ref=e91]:
+              - generic [ref=e92]: JPM
+              - button "×" [ref=e93]
+            - generic [ref=e94]:
+              - generic [ref=e95]:
+                - generic [ref=e96]: $186.58
+                - generic [ref=e97]: ▲ +0.00%
+              - table [ref=e100]:
+                - row [ref=e101]:
+                  - cell
+                  - cell [ref=e102]:
+                    - link "Charting by TradingView" [ref=e106]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e107]
+                  - cell
+          - generic [ref=e112] [cursor=pointer]:
+            - generic [ref=e113]:
+              - generic [ref=e114]: META
+              - button "×" [ref=e115]
+            - generic [ref=e116]:
+              - generic [ref=e117]:
+                - generic [ref=e118]: $499.29
+                - generic [ref=e119]: ▼ -0.00%
+              - table [ref=e122]:
+                - row [ref=e123]:
+                  - cell
+                  - cell [ref=e124]:
+                    - link "Charting by TradingView" [ref=e128]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e129]
+                  - cell
+          - generic [ref=e134] [cursor=pointer]:
+            - generic [ref=e135]:
+              - generic [ref=e136]: MSFT
+              - button "×" [ref=e137]
+            - generic [ref=e138]:
+              - generic [ref=e139]:
+                - generic [ref=e140]: $419.99
+                - generic [ref=e141]: ▲ +0.01%
+              - table [ref=e144]:
+                - row [ref=e145]:
+                  - cell
+                  - cell [ref=e146]:
+                    - link "Charting by TradingView" [ref=e150]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e151]
+                  - cell
+          - generic [ref=e156] [cursor=pointer]:
+            - generic [ref=e157]:
+              - generic [ref=e158]: NFLX
+              - button "×" [ref=e159]
+            - generic [ref=e160]:
+              - generic [ref=e161]:
+                - generic [ref=e162]: $571.98
+                - generic [ref=e163]: ▲ +0.00%
+              - table [ref=e166]:
+                - row [ref=e167]:
+                  - cell
+                  - cell [ref=e168]:
+                    - link "Charting by TradingView" [ref=e172]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e173]
+                  - cell
+          - generic [ref=e178] [cursor=pointer]:
+            - generic [ref=e179]:
+              - generic [ref=e180]: NVDA
+              - button "×" [ref=e181]
+            - generic [ref=e182]:
+              - generic [ref=e183]:
+                - generic [ref=e184]: $799.05
+                - generic [ref=e185]: ▲ +0.01%
+              - table [ref=e188]:
+                - row [ref=e189]:
+                  - cell
+                  - cell [ref=e190]:
+                    - link "Charting by TradingView" [ref=e194]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e195]
+                  - cell
+          - generic [ref=e200] [cursor=pointer]:
+            - generic [ref=e201]:
+              - generic [ref=e202]: TSLA
+              - button "×" [ref=e203]
+            - generic [ref=e204]:
+              - generic [ref=e205]:
+                - generic [ref=e206]: $249.11
+                - generic [ref=e207]: ▲ +0.01%
+              - table [ref=e210]:
+                - row [ref=e211]:
+                  - cell
+                  - cell [ref=e212]:
+                    - link "Charting by TradingView" [ref=e216]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e217]
+                  - cell
+          - generic [ref=e222] [cursor=pointer]:
+            - generic [ref=e223]:
+              - generic [ref=e224]: V
+              - button "×" [ref=e225]
+            - generic [ref=e226]:
+              - generic [ref=e227]:
+                - generic [ref=e228]: $279.92
+                - generic [ref=e229]: ▲ +0.00%
+              - table [ref=e232]:
+                - row [ref=e233]:
+                  - cell
+                  - cell [ref=e234]:
+                    - link "Charting by TradingView" [ref=e238]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e239]
+                  - cell
+          - generic [ref=e244] [cursor=pointer]:
+            - generic [ref=e245]:
+              - generic [ref=e246]: SPCX
+              - button "×" [ref=e247]
+            - generic [ref=e248]:
+              - generic [ref=e249]:
+                - generic [ref=e250]: $288.61
+                - generic [ref=e251]: ▲ +0.00%
+              - table [ref=e254]:
+                - row [ref=e255]:
+                  - cell
+                  - cell [ref=e256]:
+                    - link "Charting by TradingView" [ref=e260]:
+                      - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                      - img [ref=e261]
+                  - cell
+        - generic [ref=e266]:
+          - textbox "Add ticker..." [ref=e267]
+          - button "+" [ref=e268]
+      - generic [ref=e269]:
+        - generic [ref=e271]:
+          - generic [ref=e274]: Select a ticker
+          - table [ref=e277]:
+            - row [ref=e278]:
+              - cell
+              - cell [ref=e279]:
+                - link "Charting by TradingView" [ref=e283] [cursor=pointer]:
+                  - /url: https://www.tradingview.com/?utm_medium=lwc-link&utm_campaign=lwc-chart&utm_source=localhost/
+                  - img [ref=e284]
+              - cell [ref=e288]
+            - row [ref=e292]:
+              - cell
+              - cell [ref=e293]
+              - cell [ref=e297]
+        - generic [ref=e300]:
+          - generic [ref=e301]:
+            - generic [ref=e302]: Portfolio Heatmap
+            - img [ref=e306]:
+              - generic [ref=e307]:
+                - generic [ref=e312]: "%"
+                - generic [ref=e316]:
+                  - generic [ref=e318]: JPM
+                  - generic [ref=e319]: "-4.3%"
+                - generic [ref=e323]:
+                  - generic [ref=e325]: TSLA
+                  - generic [ref=e326]: "-0.5%"
+          - generic [ref=e327]:
+            - generic [ref=e328]: P&L Chart
+            - application [ref=e332]:
+              - generic [ref=e344]:
+                - generic [ref=e345]:
+                  - generic [ref=e347]: 1:38:30 AM
+                  - generic [ref=e349]: 1:41:40 AM
+                  - generic [ref=e351]: 1:53:13 AM
+                  - generic [ref=e353]: 4:46:35 PM
+                - generic [ref=e354]:
+                  - generic [ref=e356]: $9987
+                  - generic [ref=e358]: $9993
+                  - generic [ref=e360]: $9999
+                  - generic [ref=e362]: $10005
+                  - generic [ref=e364]: $10008
+        - generic [ref=e365]:
+          - generic [ref=e366]:
+            - generic [ref=e367]: Positions
+            - table [ref=e369]:
+              - rowgroup [ref=e370]:
+                - row "Ticker Qty Avg Cost Current P&L P&L%" [ref=e371]:
+                  - columnheader "Ticker" [ref=e372]
+                  - columnheader "Qty" [ref=e373]
+                  - columnheader "Avg Cost" [ref=e374]
+                  - columnheader "Current" [ref=e375]
+                  - columnheader "P&L" [ref=e376]
+                  - columnheader "P&L%" [ref=e377]
+              - rowgroup [ref=e378]:
+                - row "JPM 1 $195.05 $186.58 $-8.47 -4.34%" [ref=e379]:
+                  - cell "JPM" [ref=e380]
+                  - cell "1" [ref=e381]
+                  - cell "$195.05" [ref=e382]
+                  - cell "$186.58" [ref=e383]
+                  - cell "$-8.47" [ref=e384]
+                  - cell "-4.34%" [ref=e385]
+                - row "TSLA 2 $250.34 $249.11 $-2.46 -0.49%" [ref=e386]:
+                  - cell "TSLA" [ref=e387]
+                  - cell "2" [ref=e388]
+                  - cell "$250.34" [ref=e389]
+                  - cell "$249.11" [ref=e390]
+                  - cell "$-2.46" [ref=e391]
+                  - cell "-0.49%" [ref=e392]
+          - generic [ref=e393]:
+            - generic [ref=e394]: Trade History
+            - table [ref=e396]:
+              - rowgroup [ref=e397]:
+                - row "Ticker Side Qty Price Time" [ref=e398]:
+                  - columnheader "Ticker" [ref=e399]
+                  - columnheader "Side" [ref=e400]
+                  - columnheader "Qty" [ref=e401]
+                  - columnheader "Price" [ref=e402]
+                  - columnheader "Time" [ref=e403]
+              - rowgroup [ref=e404]:
+                - row "TSLA BUY 2 $250.34 10:17:47 AM" [ref=e405]:
+                  - cell "TSLA" [ref=e406]
+                  - cell "BUY" [ref=e407]
+                  - cell "2" [ref=e408]
+                  - cell "$250.34" [ref=e409]
+                  - cell "10:17:47 AM" [ref=e410]
+                - row "JPM BUY 1 $195.05 10:14:38 AM" [ref=e411]:
+                  - cell "JPM" [ref=e412]
+                  - cell "BUY" [ref=e413]
+                  - cell "1" [ref=e414]
+                  - cell "$195.05" [ref=e415]
+                  - cell "10:14:38 AM" [ref=e416]
+        - generic [ref=e417]:
+          - textbox "TICKER" [ref=e418]
+          - spinbutton [ref=e419]
+          - button "BUY" [ref=e420]
+          - button "SELL" [ref=e421]
+      - generic [ref=e423]:
+        - heading "AI Assistant" [level=2] [ref=e425]
+        - paragraph [ref=e429]: Hello! I'm FinAlly, your AI trading assistant. Ask me to analyze your portfolio, suggest trades, or execute orders on your behalf.
+        - generic [ref=e431]:
+          - textbox "Ask FinAlly..." [ref=e432]
+          - button "Send" [disabled] [ref=e433]
+  - alert [ref=e434]
+  - generic [ref=e435]: $9987

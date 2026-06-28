@@ -1,0 +1,304 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - heading "FINALLY" [level=1] [ref=e5]
+        - generic [ref=e6]: AI Trading Workstation
+      - generic [ref=e7]:
+        - generic [ref=e8]:
+          - generic [ref=e9]:
+            - generic [ref=e10]: Portfolio Value
+            - generic [ref=e11]: $10231.02
+          - generic [ref=e12]:
+            - generic [ref=e13]: P&L
+            - generic [ref=e14]:
+              - text: "+231.02"
+              - generic [ref=e15]: (+2.31%)
+        - generic [ref=e16]:
+          - generic [ref=e17]: Cash
+          - generic [ref=e18]: $4237.81
+        - generic "Live" [ref=e19]:
+          - generic [ref=e21]: Live
+    - generic [ref=e22]:
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - heading "Watchlist" [level=2] [ref=e26]
+          - generic [ref=e27]: 12 tickers
+        - generic [ref=e28]:
+          - generic [ref=e29]: Ticker
+          - generic [ref=e30]: Price
+          - generic [ref=e31]: Chg%
+          - generic [ref=e32]: Chart
+        - generic [ref=e33]:
+          - generic [ref=e36] [cursor=pointer]:
+            - generic [ref=e37]: AAPL
+            - generic [ref=e38]: $210.81
+            - generic [ref=e39]: ▲+0.00%
+            - table [ref=e43]:
+              - row [ref=e44]:
+                - cell
+                - cell [ref=e45]
+                - cell
+            - button "×" [ref=e49]
+          - generic [ref=e52] [cursor=pointer]:
+            - generic [ref=e53]: AMZN
+            - generic [ref=e54]: $157.75
+            - generic [ref=e55]: ▲+0.00%
+            - table [ref=e59]:
+              - row [ref=e60]:
+                - cell
+                - cell [ref=e61]
+                - cell
+            - button "×" [ref=e65]
+          - generic [ref=e68] [cursor=pointer]:
+            - generic [ref=e69]: GOOGL
+            - generic [ref=e70]: $151.17
+            - generic [ref=e71]: ▲+0.01%
+            - table [ref=e75]:
+              - row [ref=e76]:
+                - cell
+                - cell [ref=e77]
+                - cell
+            - button "×" [ref=e81]
+          - generic [ref=e84] [cursor=pointer]:
+            - generic [ref=e85]: JPM
+            - generic [ref=e86]: $207.21
+            - generic [ref=e87]: ▲+0.00%
+            - table [ref=e91]:
+              - row [ref=e92]:
+                - cell
+                - cell [ref=e93]
+                - cell
+            - button "×" [ref=e97]
+          - generic [ref=e100] [cursor=pointer]:
+            - generic [ref=e101]: META
+            - generic [ref=e102]: $477.76
+            - generic [ref=e103]: ▲+0.01%
+            - table [ref=e107]:
+              - row [ref=e108]:
+                - cell
+                - cell [ref=e109]
+                - cell
+            - button "×" [ref=e113]
+          - generic [ref=e116] [cursor=pointer]:
+            - generic [ref=e117]: MSFT
+            - generic [ref=e118]: $508.73
+            - generic [ref=e119]: ▲+0.00%
+            - table [ref=e123]:
+              - row [ref=e124]:
+                - cell
+                - cell [ref=e125]
+                - cell
+            - button "×" [ref=e129]
+          - generic [ref=e132] [cursor=pointer]:
+            - generic [ref=e133]: NFLX
+            - generic [ref=e134]: $524.68
+            - generic [ref=e135]: ▲+0.01%
+            - table [ref=e139]:
+              - row [ref=e140]:
+                - cell
+                - cell [ref=e141]
+                - cell
+            - button "×" [ref=e145]
+          - generic [ref=e148] [cursor=pointer]:
+            - generic [ref=e149]: NVDA
+            - generic [ref=e150]: $810.67
+            - generic [ref=e151]: ▲+0.01%
+            - table [ref=e155]:
+              - row [ref=e156]:
+                - cell
+                - cell [ref=e157]
+                - cell
+            - button "×" [ref=e161]
+          - generic [ref=e164] [cursor=pointer]:
+            - generic [ref=e165]: TSLA
+            - generic [ref=e166]: $225.48
+            - generic [ref=e167]: ▲+0.02%
+            - table [ref=e171]:
+              - row [ref=e172]:
+                - cell
+                - cell [ref=e173]
+                - cell
+            - button "×" [ref=e177]
+          - generic [ref=e180] [cursor=pointer]:
+            - generic [ref=e181]: V
+            - generic [ref=e182]: $247.05
+            - generic [ref=e183]: ▲+0.01%
+            - table [ref=e187]:
+              - row [ref=e188]:
+                - cell
+                - cell [ref=e189]
+                - cell
+            - button "×" [ref=e193]
+          - generic [ref=e196] [cursor=pointer]:
+            - generic [ref=e197]: SPCX
+            - generic [ref=e198]: $179.27
+            - generic [ref=e199]: ▲+0.01%
+            - table [ref=e203]:
+              - row [ref=e204]:
+                - cell
+                - cell [ref=e205]
+                - cell
+            - button "×" [ref=e209]
+          - generic [ref=e212] [cursor=pointer]:
+            - generic [ref=e213]: SPY
+            - generic [ref=e214]: $148.56
+            - generic [ref=e215]: ▲+0.00%
+            - table [ref=e219]:
+              - row [ref=e220]:
+                - cell
+                - cell [ref=e221]
+                - cell
+            - button "×" [ref=e225]
+        - generic [ref=e227]:
+          - textbox "Add ticker..." [ref=e228]
+          - button "+" [ref=e229]
+      - generic [ref=e230]:
+        - generic [ref=e232]:
+          - generic [ref=e233]:
+            - generic [ref=e234]:
+              - generic [ref=e235]: AAPL
+              - generic [ref=e236]: $210.81
+            - generic [ref=e237]: Live Price Chart
+          - table [ref=e240]:
+            - row [ref=e241]:
+              - cell
+              - cell [ref=e242]
+              - cell
+            - row [ref=e246]:
+              - cell
+              - cell [ref=e247]
+              - cell
+        - generic [ref=e251]:
+          - generic [ref=e252]:
+            - generic [ref=e253]: Portfolio Heatmap
+            - img [ref=e257]:
+              - generic [ref=e258]:
+                - generic [ref=e263]: "%"
+                - generic [ref=e267]:
+                  - generic [ref=e269]: NVDA
+                  - generic [ref=e270]: +5.7%
+                - generic [ref=e274]:
+                  - generic [ref=e276]: SPY
+                  - generic [ref=e277]: +4.3%
+          - generic [ref=e283]:
+            - generic [ref=e284]: P&L Chart
+            - application [ref=e288]:
+              - generic [ref=e300]:
+                - generic [ref=e301]:
+                  - generic [ref=e303]: 1:38:30 AM
+                  - generic [ref=e305]: 5:03:17 PM
+                  - generic [ref=e307]: 5:33:28 PM
+                  - generic [ref=e309]: 6:33:02 PM
+                  - generic [ref=e311]: 8:41:54 PM
+                - generic [ref=e312]:
+                  - generic [ref=e314]: $9198
+                  - generic [ref=e316]: $9548
+                  - generic [ref=e318]: $9898
+                  - generic [ref=e320]: $10248
+                  - generic [ref=e322]: $10472
+        - generic [ref=e323]:
+          - generic [ref=e324]:
+            - generic [ref=e325]: Positions
+            - table [ref=e327]:
+              - rowgroup [ref=e328]:
+                - row "Ticker Qty Avg Cost Current P&L P&L%" [ref=e329]:
+                  - columnheader "Ticker" [ref=e330]
+                  - columnheader "Qty" [ref=e331]
+                  - columnheader "Avg Cost" [ref=e332]
+                  - columnheader "Current" [ref=e333]
+                  - columnheader "P&L" [ref=e334]
+                  - columnheader "P&L%" [ref=e335]
+              - rowgroup [ref=e336]:
+                - row "JPM 1 $195.05 $207.21 +$12.16 +6.23%" [ref=e337]:
+                  - cell "JPM" [ref=e338]
+                  - cell "1" [ref=e339]
+                  - cell "$195.05" [ref=e340]
+                  - cell "$207.21" [ref=e341]
+                  - cell "+$12.16" [ref=e342]
+                  - cell "+6.23%" [ref=e343]
+                - row "NVDA 5 $767.06 $810.67 +$218.05 +5.69%" [ref=e344]:
+                  - cell "NVDA" [ref=e345]
+                  - cell "5" [ref=e346]
+                  - cell "$767.06" [ref=e347]
+                  - cell "$810.67" [ref=e348]
+                  - cell "+$218.05" [ref=e349]
+                  - cell "+5.69%" [ref=e350]
+                - row "SPY 10 $142.49 $148.56 +$60.70 +4.26%" [ref=e351]:
+                  - cell "SPY" [ref=e352]
+                  - cell "10" [ref=e353]
+                  - cell "$142.49" [ref=e354]
+                  - cell "$148.56" [ref=e355]
+                  - cell "+$60.70" [ref=e356]
+                  - cell "+4.26%" [ref=e357]
+                - row "V 1 $279.86 $247.05 $-32.81 -11.72%" [ref=e358]:
+                  - cell "V" [ref=e359]
+                  - cell "1" [ref=e360]
+                  - cell "$279.86" [ref=e361]
+                  - cell "$247.05" [ref=e362]
+                  - cell "$-32.81" [ref=e363]
+                  - cell "-11.72%" [ref=e364]
+          - generic [ref=e365]:
+            - generic [ref=e366]: Trade History
+            - table [ref=e368]:
+              - rowgroup [ref=e369]:
+                - row "Ticker Side Qty Price Time" [ref=e370]:
+                  - columnheader "Ticker" [ref=e371]
+                  - columnheader "Side" [ref=e372]
+                  - columnheader "Qty" [ref=e373]
+                  - columnheader "Price" [ref=e374]
+                  - columnheader "Time" [ref=e375]
+              - rowgroup [ref=e376]:
+                - row "NVDA BUY 5 $767.06 5:33:11 PM" [ref=e377]:
+                  - cell "NVDA" [ref=e378]
+                  - cell "BUY" [ref=e379]
+                  - cell "5" [ref=e380]
+                  - cell "$767.06" [ref=e381]
+                  - cell "5:33:11 PM" [ref=e382]
+                - row "SPY BUY 10 $142.49 5:33:11 PM" [ref=e383]:
+                  - cell "SPY" [ref=e384]
+                  - cell "BUY" [ref=e385]
+                  - cell "10" [ref=e386]
+                  - cell "$142.49" [ref=e387]
+                  - cell "5:33:11 PM" [ref=e388]
+                - row "TSLA SELL 2 $236.80 5:33:11 PM" [ref=e389]:
+                  - cell "TSLA" [ref=e390]
+                  - cell "SELL" [ref=e391]
+                  - cell "2" [ref=e392]
+                  - cell "$236.80" [ref=e393]
+                  - cell "5:33:11 PM" [ref=e394]
+                - row "V BUY 1 $279.86 5:22:28 PM" [ref=e395]:
+                  - cell "V" [ref=e396]
+                  - cell "BUY" [ref=e397]
+                  - cell "1" [ref=e398]
+                  - cell "$279.86" [ref=e399]
+                  - cell "5:22:28 PM" [ref=e400]
+                - row "TSLA BUY 2 $250.34 10:17:47 AM" [ref=e401]:
+                  - cell "TSLA" [ref=e402]
+                  - cell "BUY" [ref=e403]
+                  - cell "2" [ref=e404]
+                  - cell "$250.34" [ref=e405]
+                  - cell "10:17:47 AM" [ref=e406]
+                - row "JPM BUY 1 $195.05 10:14:38 AM" [ref=e407]:
+                  - cell "JPM" [ref=e408]
+                  - cell "BUY" [ref=e409]
+                  - cell "1" [ref=e410]
+                  - cell "$195.05" [ref=e411]
+                  - cell "10:14:38 AM" [ref=e412]
+        - generic [ref=e413]:
+          - generic [ref=e414]: Order Entry
+          - textbox "AAPL" [ref=e415]
+          - spinbutton [ref=e416]
+          - generic [ref=e417]: $210.81
+          - button "BUY" [ref=e418]
+          - button "SELL" [ref=e419]
+      - generic [ref=e421]:
+        - generic [ref=e422]:
+          - heading "AI Assistant" [level=2] [ref=e423]
+          - generic [ref=e424]: FinAlly
+        - paragraph [ref=e428]: Hello! I'm FinAlly, your AI trading assistant. Ask me to analyze your portfolio, suggest trades, or execute orders on your behalf.
+        - generic [ref=e430]:
+          - textbox "Ask FinAlly..." [ref=e431]
+          - button "Send" [disabled] [ref=e432]
+  - alert [ref=e433]
+  - generic [ref=e434]: $9198
