@@ -47,23 +47,24 @@ export default function WatchlistRow({ ticker }: WatchlistRowProps) {
         display: 'grid',
         gridTemplateColumns: '52px 64px 52px 60px 16px',
         alignItems: 'center',
-        height: 36,
+        height: 38,
         padding: '0 8px',
         paddingLeft: isSelected ? '6px' : '8px',
         cursor: 'pointer',
         borderBottom: '1px solid #21262d',
         borderLeft: isSelected ? '2px solid #209dd7' : 'none',
-        backgroundColor: isSelected || hovered ? '#161b22' : 'transparent',
+        backgroundColor: isSelected ? '#1a2030' : hovered ? '#161b22' : 'transparent',
+        transition: 'background-color 120ms ease',
       }}
       onClick={() => setSelectedTicker(ticker)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       {/* Ticker symbol */}
-      <span style={{ color: '#e6edf3', fontWeight: 600, fontSize: 13 }}>{ticker}</span>
+      <span style={{ color: '#e6edf3', fontWeight: 700, fontSize: 12, letterSpacing: '0.04em' }}>{ticker}</span>
 
       {/* Price cell with flash animation */}
-      <div ref={priceCellRef} style={{ textAlign: 'right', color: '#e6edf3', fontSize: 13 }}>
+      <div ref={priceCellRef} style={{ textAlign: 'right', color: '#e6edf3', fontSize: 12, fontWeight: 600 }}>
         {update?.price.toFixed(2) ?? '—'}
       </div>
 
@@ -72,7 +73,13 @@ export default function WatchlistRow({ ticker }: WatchlistRowProps) {
         style={{
           textAlign: 'right',
           color: changePercent != null && changePercent >= 0 ? '#22c55e' : '#ef4444',
-          fontSize: 11,
+          fontSize: 10,
+          backgroundColor:
+            changePercent != null && changePercent >= 0
+              ? 'rgba(34,197,94,0.12)'
+              : 'rgba(239,68,68,0.12)',
+          padding: '1px 4px',
+          borderRadius: 2,
         }}
       >
         {changePercent != null

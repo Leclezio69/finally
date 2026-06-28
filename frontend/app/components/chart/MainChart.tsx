@@ -29,10 +29,11 @@ export default function MainChart() {
       layout: {
         background: { type: ColorType.Solid, color: '#0d1117' },
         textColor: '#8b949e',
+        fontFamily: 'JetBrains Mono, Cascadia Code, Fira Code, Consolas, monospace',
       },
       grid: {
         vertLines: { visible: false },
-        horzLines: { color: '#161b22' },
+        horzLines: { color: '#1a1e24' },
       },
       crosshair: { mode: 1 }, // Magnet mode
       timeScale: {
@@ -48,10 +49,10 @@ export default function MainChart() {
 
     // v5 breaking change: use addSeries with the AreaSeries class token (v4 addArea variant removed)
     const series = chart.addSeries(AreaSeries, {
-      topColor: 'rgba(32, 157, 215, 0.4)',
+      topColor: 'rgba(32, 157, 215, 0.28)',
       bottomColor: 'rgba(32, 157, 215, 0.0)',
       lineColor: '#209dd7',
-      lineWidth: 2,
+      lineWidth: 3,
     })
     seriesRef.current = series
 
@@ -97,39 +98,49 @@ export default function MainChart() {
 
   return (
     <div style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-      {/* Chart header bar — 32px, shows selected ticker + live price */}
+      {/* Chart header bar — 40px, shows selected ticker + live price */}
       <div
         style={{
-          height: 32,
+          height: 40,
           display: 'flex',
           alignItems: 'center',
           padding: '0 16px',
           borderBottom: '1px solid #30363d',
+          boxShadow: '0 1px 0 #30363d, 0 2px 0 rgba(32,157,215,0.15)',
           gap: 12,
           flexShrink: 0,
-          backgroundColor: '#0d1117',
+          backgroundColor: '#0f1318',
         }}
       >
-        <span style={{ fontSize: 13, fontWeight: 600, color: '#e6edf3' }}>
-          {selectedTicker ?? '—'}
-        </span>
-        {update && (
-          <span
-            style={{
-              fontSize: 13,
-              color:
-                update.direction === 'up'
-                  ? '#22c55e'
-                  : update.direction === 'down'
-                    ? '#ef4444'
-                    : '#e6edf3',
-            }}
-          >
-            {update.price.toFixed(2)}
+        {!selectedTicker ? (
+          <span style={{ fontSize: 12, color: '#8b949e', margin: 'auto' }}>
+            Select a ticker to view chart
           </span>
-        )}
-        {!update && selectedTicker && (
-          <span style={{ fontSize: 11, color: '#8b949e' }}>Waiting for data...</span>
+        ) : (
+          <>
+            <span style={{ fontSize: 15, fontWeight: 700, color: '#e6edf3', letterSpacing: '0.04em' }}>
+              {selectedTicker}
+            </span>
+            {update && (
+              <span
+                style={{
+                  fontSize: 15,
+                  fontWeight: 600,
+                  color:
+                    update.direction === 'up'
+                      ? '#22c55e'
+                      : update.direction === 'down'
+                        ? '#ef4444'
+                        : '#e6edf3',
+                }}
+              >
+                {update.price.toFixed(2)}
+              </span>
+            )}
+            {!update && (
+              <span style={{ fontSize: 11, color: '#8b949e' }}>Waiting for data...</span>
+            )}
+          </>
         )}
       </div>
 
