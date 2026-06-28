@@ -14,7 +14,7 @@
 | 2 | Watchlist & Charts | 2/3 | In Progress|  |
 | 3 | Portfolio & Trading | Heatmap, P&L chart, positions table, trade bar | PORT-01–06, TRADE-01–05 | 5 |
 | 4 | AI Chat Panel | 2/2 | Complete   | 2026-06-28 |
-| 5 | Docker & E2E | Full container build, all tests passing | SETUP-05, SETUP-06, TEST-01 | 4 |
+| 5 | Docker & E2E | 1/1 | Complete   | 2026-06-28 |
 
 ---
 

@@ -11,8 +11,8 @@
 - [ ] **SETUP-02**: `frontend` empty file is removed and replaced with a Next.js TypeScript project directory
 - [ ] **SETUP-03**: Next.js project configured with `output: 'export'` and Tailwind CSS dark theme
 - [ ] **SETUP-04**: Frontend builds successfully to `frontend/out/` static export
-- [ ] **SETUP-05**: Docker multi-stage build succeeds (Node stage builds frontend, Python stage serves it)
-- [ ] **SETUP-06**: `./scripts/start.sh` launches the container and app is accessible at `http://localhost:8000`
+- [x] **SETUP-05**: Docker multi-stage build succeeds (Node stage builds frontend, Python stage serves it)
+- [x] **SETUP-06**: `./scripts/start.sh` launches the container and app is accessible at `http://localhost:8000`
 
 ### Watchlist
 
@@ -65,7 +65,7 @@
 
 ### Testing
 
-- [ ] **TEST-01**: All 19 existing Playwright E2E tests pass against the full Docker container
+- [x] **TEST-01**: All 19 existing Playwright E2E tests pass against the full Docker container
 
 ## v2 Requirements
 
@@ -132,9 +132,9 @@
 | VIS-02 | Phase 1 | Pending |
 | VIS-03 | Phase 2 | Complete |
 | VIS-04 | Phase 2 | Complete |
-| SETUP-05 | Phase 5 | Pending |
-| SETUP-06 | Phase 5 | Pending |
-| TEST-01 | Phase 5 | Pending |
+| SETUP-05 | Phase 5 | Complete |
+| SETUP-06 | Phase 5 | Complete |
+| TEST-01 | Phase 5 | Complete |
 
 **Coverage:**
 - v1 requirements: 35 total
