@@ -139,6 +139,20 @@
 - CHAT-05: Watchlist changes shown inline as confirmation chips
 - CHAT-06: Chat panel is collapsible/toggleable to reclaim screen space
 
+**Plans:** 2 plans
+
+**Wave 1**
+- [ ] 04-01-PLAN.md — Expose refetchPortfolio + refetchWatchlist from contexts + add @keyframes spin
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 04-02-PLAN.md — ChatPanel component + page.tsx wiring + collapse toggle + E2E tests
+
+**Cross-cutting constraints:**
+- All new components require `'use client'` directive (static export)
+- No new npm packages — React 19 built-ins only
+- Chips sourced from executed_trades (not trades) to show actual results, not LLM intent
+- ChatPanel stays mounted on collapse (never unmounts) — message history persists
+
 **Success Criteria:**
 1. Sending "What's my portfolio worth?" returns a response mentioning the dollar value within 10s
 2. Loading indicator (spinner or skeleton) is visible between message submission and response arrival
